@@ -31,6 +31,7 @@ FROM openjdk:8-jre-alpine
 RUN apk add --no-cache \
     bash \
     curl \
+    netcat-openbsd \
     tzdata && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
@@ -88,22 +89,24 @@ EXPOSE $SERVER_PORT
 ENTRYPOINT ["sh", "-c", "\
 echo '=== ThriveX 博客系统启动中 ===' && \
 echo '当前时间:' $(date) && \
-echo '服务端口: ${SERVER_PORT}' && \
-echo '数据库地址: ${DB_HOST}:${DB_PORT}/${DB_NAME}' && \
-echo '邮件服务器: ${EMAIL_HOST}:${EMAIL_PORT}' && \
-exec java ${JAVA_OPTS} -jar \
--Dserver.port=${SERVER_PORT} \
--Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} \
--Dspring.datasource.url='jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8' \
--Dspring.datasource.username='${DB_USERNAME}' \
--Dspring.datasource.password='${DB_PASSWORD}' \
+echo '服务端口: '$SERVER_PORT && \
+echo '数据库地址: '$DB_HOST':'$DB_PORT'/'$DB_NAME && \
+echo '邮件服务器: '$EMAIL_HOST':'$EMAIL_PORT && \
+echo '正在测试数据库连接...' && \
+nc -z $DB_HOST $DB_PORT && echo '数据库连接测试成功' || echo '数据库连接测试失败' && \
+exec java $JAVA_OPTS -jar \
+-Dserver.port=$SERVER_PORT \
+-Dspring.profiles.active=$SPRING_PROFILES_ACTIVE \
+-Dspring.datasource.url=jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8 \
+-Dspring.datasource.username=$DB_USERNAME \
+-Dspring.datasource.password=$DB_PASSWORD \
 -Dspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
--Dspring.mail.host='${EMAIL_HOST}' \
--Dspring.mail.port='${EMAIL_PORT}' \
--Dspring.mail.username='${EMAIL_USERNAME}' \
--Dspring.mail.password='${EMAIL_PASSWORD}' \
--Dspring.mail.protocol='${EMAIL_PROTOCOL}' \
--Dspring.mail.default-encoding='${EMAIL_DEFAULT_ENCODING}' \
+-Dspring.mail.host=$EMAIL_HOST \
+-Dspring.mail.port=$EMAIL_PORT \
+-Dspring.mail.username=$EMAIL_USERNAME \
+-Dspring.mail.password=$EMAIL_PASSWORD \
+-Dspring.mail.protocol=$EMAIL_PROTOCOL \
+-Dspring.mail.default-encoding=$EMAIL_DEFAULT_ENCODING \
 -Dspring.mail.properties.mail.smtp.auth=true \
 -Dspring.mail.properties.mail.smtp.starttls.enable=true \
 ./app.jar"]
