@@ -88,20 +88,20 @@ mvn spring-boot:run
 
 1. **构建镜像**
 ```bash
-docker build -t ice-blog-server .
+docker build -t ice-server .
 ```
 
 2. **运行容器**
 ```bash
 docker run -d \
   --name ice-blog-server \
-  -p 8080:8080 \
+  -p 9003:9003 \
   -e MYSQL_HOST=your_mysql_host \
   -e MYSQL_PORT=3306 \
   -e MYSQL_DATABASE=thrivex \
   -e MYSQL_USERNAME=your_username \
   -e MYSQL_PASSWORD=your_password \
-  ice-blog-server
+  ice-server
 ```
 
 ## 📖 API 文档
