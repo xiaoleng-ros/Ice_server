@@ -8,3 +8,9 @@ docker/backup
 
 .DS_Store
 **/.DS_Store
+
+# 环境变量文件（包含敏感信息，不应上传到 GitHub）
+.env
+.env.local
+.env.production
+.env.staging
