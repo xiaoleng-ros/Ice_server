@@ -4,11 +4,11 @@
     </a>
 </p>
 
-<p align="center" style="font-size:20px; font-weight:700;">Ice Blog Server</p>
+<p align="center" style="font-size:20px; font-weight:700;">Ice Server</p>
 
 <p align="center" style="margin-bottom:10px">基于 ThriveX 定制开发的现代化博客后端服务</p>
 
-# 🎉 Ice Blog Server
+# 🎉 Ice Server
 
 `Ice Server` 是基于优秀的开源博客系统 ThriveX 进行定制开发的后端服务，采用 `Spring Boot` 技术栈构建，为现代化博客系统提供强大的后端支持。
 
@@ -107,8 +107,8 @@ docker run -d \
 ## 📖 API 文档
 
 项目集成了 Swagger，启动后可访问：
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
-- API Docs: `http://localhost:8080/v2/api-docs`
+- Swagger UI: `http://localhost:9003/swagger-ui.html`
+- API Docs: `http://localhost:9003/v2/api-docs`
 
 ## 🔧 配置说明
 
