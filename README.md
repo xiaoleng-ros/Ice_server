@@ -1,224 +1,171 @@
 <p align="center">
-    <a href="https://liuyuyang.net" target="_blank">
-        <img width="100" src="https://bu.dusays.com/2024/11/17/6739adf188f64.png" alt="ThriveX logo" style="width:100px" />
+    <a href="https://github.com/xiaoleng-ros/Ice_server" target="_blank">
+        <img width="100" src="https://bu.dusays.com/2024/11/17/6739adf188f64.png" alt="Ice Blog logo" style="width:100px" />
     </a>
 </p>
 
-<p align="center" style="font-size:20px; font-weight:700;">ThriveX</p>
+<p align="center" style="font-size:20px; font-weight:700;">Ice Blog Server</p>
+
+<p align="center" style="margin-bottom:10px">基于 ThriveX 定制开发的现代化博客后端服务</p>
+
+# 🎉 Ice Blog Server
+
+`Ice Server` 是基于优秀的开源博客系统 ThriveX 进行定制开发的后端服务，采用 `Spring Boot` 技术栈构建，为现代化博客系统提供强大的后端支持。
+
+## 🛠️ 技术架构
+
+**后端技术栈：**
+- **Spring Boot** - 主要框架
+- **Mybatis Plus** - ORM框架
+- **Redis** - 缓存服务
+- **MySQL** - 数据库
+- **Docker** - 容器化部署
+- **X File Storage** - 文件存储
+- **Swagger** - API文档
+
+## 📁 项目结构
+
+```
+ThriveX-Server/
+├── blog/                   # 博客核心模块
+│   ├── src/main/
+│   │   ├── java/          # Java源码
+│   │   └── resources/     # 配置文件
+│   └── pom.xml
+├── model/                  # 数据模型模块
+│   ├── src/main/java/
+│   └── pom.xml
+├── Dockerfile             # Docker构建文件
+├── ThriveX.sql           # 数据库脚本
+└── pom.xml               # 主POM文件
+```
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Java 8+
+- Maven 3.6+
+- MySQL 5.7+
+- Redis 3.0+
 
-<p align="center" style="margin-bottom:10px">年轻、高颜值、全开源、永不收费的现代化博客管理系统</p>
+### 本地开发
 
-![](https://bu.dusays.com/2024/11/25/67445b7df3742.png)
+1. **克隆项目**
+```bash
+git clone https://github.com/xiaoleng-ros/Ice_server.git
+cd Ice_server
+```
 
+2. **配置数据库**
+```bash
+# 创建数据库
+mysql -u root -p
+CREATE DATABASE thrivex;
 
-项目预览：[https://liuyuyang.net/](https://liuyuyang.net/)
+# 导入数据库脚本
+mysql -u root -p thrivex < ThriveX.sql
+```
 
-项目官网：[https://thrivex.liuyuyang.net/](https://thrivex.liuyuyang.net/)
+3. **修改配置**
+编辑 `blog/src/main/resources/application.yml` 文件，配置数据库连接信息：
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/thrivex
+    username: your_username
+    password: your_password
+```
 
-项目文档：[https://docs.liuyuyang.net/](https://docs.liuyuyang.net/)
+4. **启动项目**
+```bash
+mvn clean install
+cd blog
+mvn spring-boot:run
+```
 
+### Docker 部署
 
+1. **构建镜像**
+```bash
+docker build -t ice-blog-server .
+```
 
-# 🎉 ThriveX 现代化博客管理系统
+2. **运行容器**
+```bash
+docker run -d \
+  --name ice-blog-server \
+  -p 8080:8080 \
+  -e MYSQL_HOST=your_mysql_host \
+  -e MYSQL_PORT=3306 \
+  -e MYSQL_DATABASE=thrivex \
+  -e MYSQL_USERNAME=your_username \
+  -e MYSQL_PASSWORD=your_password \
+  ice-blog-server
+```
 
-🎉 `ThriveX` 是一个年轻、高颜值、全开源、永不收费的现代化博客管理系统，它是一个基于 `NextJS` + `Spring Boot` 的产物，所有技术栈都是目前市面上最主流的
+## 📖 API 文档
 
-🛠️ **技术架构：**
+项目集成了 Swagger，启动后可访问：
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- API Docs: `http://localhost:8080/v2/api-docs`
 
-前端：**React 19**、**Next.js 15**、**TailwindCSS 4**、TypeScript、Zustand、Motion React、React Form Hooks、Echarts、Hero UI、Antd UI、Scss、Vercel、Docker、百度统计、高德地图
+## 🔧 配置说明
 
+主要配置文件位于 `blog/src/main/resources/application.yml`，包含：
 
-后端：**Spring Boot**、Mybatis Plus、Redis、MySQL、Docker、X File Storage、Swagger
+- 数据库连接配置
+- Redis 配置
+- 文件存储配置
+- 日志配置
+- 其他业务配置
 
+## 🐛 问题反馈
 
-❤️ **项目初衷：**
+如果您在使用过程中遇到问题，请通过以下方式反馈：
 
-一直对网站开发领域很感兴趣，从小就希望有一个属于自己的网站，因此踏上了 `Web` 全栈开发的旅途，立志有朝一日也能开发一款属于自己的网站。如今历时 `2` 年有余，一个人从 `0` 到 `1` 独立完成整个项目的全栈开发，也算是完成了从小的一个心愿
+1. 提交 [GitHub Issue](https://github.com/xiaoleng-ros/Ice_server/issues)
+2. 发送邮件至项目维护者
 
+## 🤝 贡献指南
 
+欢迎提交 Pull Request 来改进项目：
 
-## 项目演示
+1. Fork 本仓库
+2. 创建您的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交您的修改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开一个 Pull Request
 
-### 前端
+## 📄 开源协议
 
-这里只演示部分前端界面，具体大家可以自行查看 **->** [https://liuyuyang.net](https://liuyuyang.net)
+本项目遵循 **AGPL-3.0 license** 开源协议。
 
-![首页](https://bu.dusays.com/2024/10/28/671f7a44631d7.png)
+## 致谢
 
-![足迹](https://bu.dusays.com/2024/09/17/66e97036dddcb.png)
+本项目基于 [ThriveX](https://github.com/LiuYuYang01/ThriveX) 开源博客系统进行开发和定制。
 
+**原作者**: 宇阳  
+**原项目地址**: https://github.com/LiuYuYang01/ThriveX
 
+感谢原作者的开源贡献，为我们提供了优秀的博客系统基础架构。ThriveX 是一个年轻、高颜值、全开源、永不收费的现代化博客管理系统，采用 NextJS + Spring Boot 技术栈开发。
 
-### 控制端
+### 原项目相关链接
 
-![数据分析](https://bu.dusays.com/2024/09/17/66e97035726ae.png)
+- **项目官网**: https://thrivex.liuyuyang.net/
+- **项目文档**: https://docs.liuyuyang.net/
+- **项目演示**: https://liuyuyang.net/
 
-![文件系统](https://bu.dusays.com/2024/09/17/66e97031cd456.png)
+### ThriveX 项目组成
 
+- **前端**: [ThriveX-Blog](https://github.com/LiuYuYang01/ThriveX-Blog)
+- **控制端**: [ThriveX-Admin](https://github.com/LiuYuYang01/ThriveX-Admin)  
+- **后端**: [ThriveX-Server](https://github.com/LiuYuYang01/ThriveX-Server)
 
+感谢 ThriveX 团队为开源社区做出的贡献！
 
-## 项目部署
+---
 
-官方文档：[https://docs.liuyuyang.net/docs/项目部署/1Panel.html](https://docs.liuyuyang.net/docs/项目部署/1Panel.html)
-
-
-
-## 开源地址
-
-### 3.0 最新版（Nextjs + Spring Boot）
-
-前端：[LiuYuYang01/ThriveX-Blog (github.com)](https://github.com/LiuYuYang01/ThriveX-Blog)
-
-控制端：[LiuYuYang01/ThriveX-Admin (github.com)](https://github.com/LiuYuYang01/ThriveX-Admin)
-
-后端：[LiuYuYang01/ThriveX-Server (github.com)](https://github.com/LiuYuYang01/ThriveX-Server)
-
-
-
-### 2.0 旧版（Vue3 + Python Flask）
-
-前端：[LiuYuYang01/Thrive-Blog (github.com)](https://github.com/LiuYuYang01/Thrive-Blog)
-
-控制端：[LiuYuYang01/Thrive-Admin (github.com)](https://github.com/LiuYuYang01/Thrive-Admin)
-
-后端：[LiuYuYang01/Thrive-Server (github.com)](https://github.com/LiuYuYang01/Thrive-Server)
-
-![后台](https://bu.dusays.com/2024/09/17/66e96ca781d49.png)
-
-
-
-## 开源协议
-
-为了项目的生态越来越强大，作者在这里恳请大家保留 `ThriveX` 博客系统版权
-
-在项目 `Star` 突破 `2K` 后大家可自由选择删除 `or` 保留
-
-如果对该项目进行二次开发，最终需将项目进行开源并保留版权 且 禁止任何商业行为
-
-最后希望大家能够请遵守开源协议：**AGPL-3.0 license**
-
-弘扬开源精神，从你我做起！
-
-
-
-## 关于项目
-
-这个项目是我一个人从设计 -> 产品 -> 前端 -> 控制端 -> 后端以及数据库从 `0` 到 `1` 创造的，一个人的精力有限，项目可能会存在一些隐藏的 `BUG`，希望大家能够及时在 `GitHub` 提交 `Issue`，这样也好加以改正，不断改善，成为最佳！
-
-当然我更希望大家能够提交 `PR` 成为 `ThriveX` 的贡献者，大家一起参与进来，构建一个强大的博客管理系统！
-
-
-## 特别鸣谢
-
-该项目的风格借鉴了很多优秀网站的灵感，下面我主要列举几个：
-
-[https://blog.zwying.com/](https://blog.zwying.com/)
-
-[https://www.blatr.cn/](https://www.blatr.cn/)
-
-[https://poetize.cn/](https://poetize.cn/)
-
-
-
-## ThriveX 交流群 🔥
-
-大家在部署时遇到任何问题欢迎加入官方交流群进行探索
-
-加微信：`liuyuyang2023`   记得说明在哪里看到的 ThriveX 项目
-
-![微信](https://bu.dusays.com/2025/06/03/683e96eb43ad8.jpg)
-
-
-
-# 常见疑惑
-
-下面总结一些大家常问的疑惑
-
-
-## 为什么会想到开发这个项目？
-
-**问：** 为什么会想到开发这个项目？
-# 常见疑惑
-
-下面总结一些大家常问的疑惑
-
-
-## 为什么会想到开发这个项目？
-
-**问：** 为什么会想到开发这个项目？
-
-**答：** 在开发这个项目之前我也使用了很多流行的博客系统，比如：`WordPress`（使用了两年）、`Emlog`、`Zblog`（一年）、`Typecho`（两年）
-
-这些系统都有一个共同点，它们都是基于 `PHP` 开发的，如果不会 `PHP` 就不好自定义网站主题和功能插件，只能去找别人写好的，如果别人没有写，那么你就没办法用，这样就会有很大的局限性。
-
-关键是 `PHP` 在国内几乎已经被淘汰了，所以没有必要再去刻意学习这门语言。
-
-出于局限性我就萌生了开发一整个博客系统的想法，从 `22` 年正式落实并开发，目前已经持续完成三大版本，分别是：
-
-1. Vue2 + Express（Nodejs）
-2. Vue3 + Flask（Python）
-3. NextJS + Spring Boot（Java）
-
-样式借鉴了很多大佬的网站风格，但代码都是自己一行一行敲出来的，目前在 `Github` 已有近 `3000` 次代码提交记录
-
-项目的所有技术栈都是目前最主流的，是一个非常年轻的现代化博客管理系统 🎉
-
-
-
-## 为什么不采用纯 JavaScript 全栈开发？
-
-有些网友提出了这个问题，目前 `Nextjs + Spring Boot` 实在太臃肿了，完全可以采用 `Nextjs + Prisma` 纯 `JavaScript` 技术栈实现全栈开发，这样部署也方便。
-
-是的，没错。
-
-但我的想法是把前端、控制端 以及 后端全部分离，任何地方都可以相互独立出来。比如你想自己写前端，不管你使用哪些技术栈，只需要调用后端接口就可以自己开发。
-
-如果使用了 `Nextjs` 做全栈，那么前后端就会捆绑起来，这样的话前端就必须使用 `React` 而且如果不懂 `Nextjs` 还会额外增加开发及学习成本
-
-
-
-## 项目后期是否会考虑收费？
-
-有很多跟我一样从 `0` 到 `1` 写博客系统的同行，但他们大多数以盈利为目地而开发，而且更新频率并不高，大家不信可以对比一下做个参考
-
-而我可以在此承诺，`ThriveX` 在现在乃至未来不会以任何方式收费，就连赞助二维码都不会有，这一波格局直接拉满 😁
-
-这个项目纯纯为爱发电，这一点是所有博客系统当中比不了的
-
-
-
-## 项目会保持长期维护吗？
-
-大家可能会觉得我不以盈利为目的最终会丧失热情导致不再维护，其实我想说这个顾虑可以打消
-
-在这两年期间内我已经累计提交了近 `3000` 次代码，只要工作之余有时间我都会不断的更新维护，有任何 `BUG` 我都会及时解决
-
-
-
-# 后续研发计划
-
-## 前端
-
-1. ~~照片墙页面~~
-2. ~~闪念集成 `WangEditor` 编辑器~~
-3. ~~资源懒加载~~
-4. 优化文章翻页（待完成）
-
-
-
-## 控制端
-
-1. ~~素材库~~
-2. ~~集成 `DeepSeek` 文章优化~~
-3. ~~文件列表懒加载~~
-4. ~~优化 RBAC 权限~~
-5. ~~批量通过 `Markdown` 文件导入文章~~
-6. 文件上传多个导致偶尔无法复制
-7. 修改前端 `ico` 图标没有效果
-
-
-
-## 后端
-
-1. 约束指定域名才能调用后端接口
-2. 对外开放的 post 接口做个频率限制
+<p align="center">
+  <sub>Built with ❤️ based on ThriveX</sub>
+</p>
