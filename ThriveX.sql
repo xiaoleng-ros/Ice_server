@@ -300,7 +300,7 @@ CREATE TABLE `env_config` (
 
 LOCK TABLES `env_config` WRITE;
 /*!40000 ALTER TABLE `env_config` DISABLE KEYS */;
-INSERT INTO `env_config` VALUES (1,'baidu_statis','{\"site_id\": 0, \"access_token\": \"\"}','百度统计配置'),(2,'email','{\"host\": \"smtp.qq.com\", \"port\": 465, \"password\": \"\", \"username\": \"xxx@qq.com\"}','邮件发送配置'),(3,'gaode_map','{\"key_code\": \"\", \"security_code\": \"\"}','高德地图配置'),(4,'gaode_coordinate','{\"key\": \"\"}','高德地图坐标配置');
+INSERT INTO `env_config` VALUES (1,'baidu_statis','{\"site_id\": 0, \"access_token\": \"\"}','百度统计配置'),(2,'email','{\"host\": \"smtp.qq.com\", \"port\": 587, \"password\": \"mrflyntajdjagehf\", \"username\": \"1873048956@qq.com\"}','邮件发送配置'),(3,'gaode_map','{\"key_code\": \"\", \"security_code\": \"\"}','高德地图配置'),(4,'gaode_coordinate','{\"key\": \"\"}','高德地图坐标配置');
 /*!40000 ALTER TABLE `env_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
