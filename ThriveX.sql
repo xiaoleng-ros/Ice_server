@@ -739,7 +739,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','e10adc3949ba59abbe56e057f20f883e','宇阳','3311118881@qq.com','https://bu.dusays.com/2024/11/17/6739adf188f64.png','ThriveX 博客管理系统作者','1','1723533206613');
+INSERT INTO `user` VALUES (1,'admin','e10adc3949ba59abbe56e057f20f883e','小冷','1873048956@qq.com','https://bu.dusays.com/2024/11/17/6739adf188f64.png','小冷同学','1','1723533206613');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

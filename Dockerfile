@@ -82,7 +82,7 @@ echo '启动 Java 应用...' && \
 exec java $JAVA_OPTS -jar ./app.jar \
     -Dserver.port=$SERVER_PORT \
     -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE \
-    -Dspring.datasource.url=\"jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8\" \
+    -Dspring.datasource.url=\"jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?sslmode=REQUIRED&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8\" \
     -Dspring.datasource.username=\"$DB_USERNAME\" \
     -Dspring.datasource.password=\"$DB_PASSWORD\" \
     -Dspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
