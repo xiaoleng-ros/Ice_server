@@ -1,5 +1,6 @@
 server:
   port: ${PORT:9003}
+  address: 0.0.0.0
 
 spring:
   datasource:

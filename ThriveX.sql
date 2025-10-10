@@ -469,7 +469,7 @@ CREATE TABLE `oss` (
 
 LOCK TABLES `oss` WRITE;
 /*!40000 ALTER TABLE `oss` DISABLE KEYS */;
-INSERT INTO `oss` VALUES (1,'local',NULL,'','/Users/yang/Desktop/收纳/项目/ThriveX/ThriveX-Server/',NULL,'localhost:9003/static/','upload/',1);
+INSERT INTO `oss` VALUES (1,'local',NULL,'','/app/',NULL,'https://ice-server-poyr.onrender.com/static/','upload/',1);
 /*!40000 ALTER TABLE `oss` ENABLE KEYS */;
 UNLOCK TABLES;
 
