@@ -86,7 +86,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
     @Override
     public List<Map> getPlatform() {
         List<Map> result = new ArrayList<>();
-        String[] list = {"huawei", "aliyun", "qiniu", "tencent", "minio"};
+        String[] list = {"huawei", "aliyun", "qiniu", "tencent", "minio", "smms"};
 
         for (String item : list) {
             Map<String, String> data = new HashMap<>();
@@ -152,6 +152,8 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
                 return "腾讯云";
             case "minio":
                 return "Minio";
+            case "smms":
+                return "SM.MS图床";
         }
 
         return data;
