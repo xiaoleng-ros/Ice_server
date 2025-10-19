@@ -471,6 +471,7 @@ LOCK TABLES `oss` WRITE;
 /*!40000 ALTER TABLE `oss` DISABLE KEYS */;
 INSERT INTO `oss` VALUES (1,'local',NULL,'','/app/',NULL,'https://ice-server-poyr.onrender.com/static/','upload/',1);
 INSERT INTO `oss` VALUES (2,'smms',NULL,'your-smms-api-token','','','https://sm.ms','',0);
+INSERT INTO `oss` VALUES (3,'imgtp',NULL,'your-imgtp-api-token','','','https://www.imgtp.com','',0);
 /*!40000 ALTER TABLE `oss` ENABLE KEYS */;
 UNLOCK TABLES;
 

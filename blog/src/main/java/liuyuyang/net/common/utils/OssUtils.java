@@ -146,6 +146,23 @@ public class OssUtils {
         list.add(smmsStorage);
     }
 
+    /**
+     * 将路过图床配置信息设置到存储平台
+     */
+    public static void setImgtpConfig(Oss oss) {
+        CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
+        ImgtpConfig config = new ImgtpConfig();
+        config.setPlatform(oss.getPlatform());
+        config.setSecretKey(oss.getSecretKey());
+        config.setDomain(oss.getDomain());
+        config.setBasePath(oss.getBasePath());
+        removeStorage(list, oss.getPlatform());
+        
+        // 创建路过图床存储实例并添加到列表
+        ImgtpFileStorage imgtpStorage = new ImgtpFileStorage(config);
+        list.add(imgtpStorage);
+    }
+
     // 加载指定的平台
     public static void registerPlatform(Oss oss) {
         switch (oss.getPlatform()) {
@@ -175,6 +192,10 @@ public class OssUtils {
                 return;
             case "smms":
                 setSmmsConfig(oss);
+                platform = oss.getPlatform();
+                return;
+            case "imgtp":
+                setImgtpConfig(oss);
                 platform = oss.getPlatform();
                 return;
         }
