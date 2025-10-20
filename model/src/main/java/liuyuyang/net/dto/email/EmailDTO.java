@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class EmailDTO {
-    @ApiModelProperty(value = "邮件接收�?, example = "3311118881@qq.com")
+    @ApiModelProperty(value = "邮件接收人", example = "3311118881@qq.com")
     private String to;
-    @ApiModelProperty(value = "邮件标题", example = "这是一段标�?, required = true)
+    @ApiModelProperty(value = "邮件标题", example = "这是一段标题", required = true)
     private String subject;
 }

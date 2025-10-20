@@ -102,7 +102,7 @@ public class ImgtpFileStorage implements FileStorage {
         try {
             String deleteHash = (String) fileInfo.getAttr().get("deleteHash");
             if (deleteHash == null || deleteHash.isEmpty()) {
-                // 如果没有删除hash，无法删�?                return false;
+                // 如果没有删除hash，无法删除                return false;
             }
             
             HttpRequest request = HttpRequest.newBuilder()
@@ -135,7 +135,7 @@ public class ImgtpFileStorage implements FileStorage {
     
     @Override
     public void download(FileInfo fileInfo, InputStream inputStream) {
-        throw new FileStorageRuntimeException("路过图床不支持下载功�?);
+        throw new FileStorageRuntimeException("路过图床不支持下载功能");
     }
     
     @Override

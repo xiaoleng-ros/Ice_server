@@ -9,11 +9,11 @@ public class WallEmailDTO extends EmailDTO {
     private String subject;
     @ApiModelProperty(value = "发送方", example = "张三", required = true)
     String recipient;
-    @ApiModelProperty(value = "评论时间", example = "2024�?0�?5�?14:44", required = true)
+    @ApiModelProperty(value = "评论时间", example = "2024-05-14 14:44", required = true)
     String time;
-    @ApiModelProperty(value = "你的内容", example = "太赞�?, required = true)
+    @ApiModelProperty(value = "你的内容", example = "太赞了！", required = true)
     String your_content;
-    @ApiModelProperty(value = "回复内容", example = "必须�?, required = true)
+    @ApiModelProperty(value = "回复内容", example = "必须包含回复内容", required = true)
     String reply_content;
     @ApiModelProperty(value = "文章地址", example = "https://liuyuyang.net", required = true)
     String url;

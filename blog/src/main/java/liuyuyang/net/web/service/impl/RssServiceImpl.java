@@ -48,10 +48,13 @@ public class RssServiceImpl implements RssService {
     private final Map<Integer, String> typeCache = new ConcurrentHashMap<>();
 
     /**
-     * 初始化方法，在Bean创建后自动执�?     * 预加载所有链接类型数据到内存缓存�?     */
+     * 初始化方法，在 Bean 创建后自动执行
+     * 预加载所有链接类型数据到内存缓存
+     */
     @PostConstruct
     public void init() {
-        // 从数据库加载所有链接类型，并存入缓�?        linkTypeMapper.selectList(null).forEach(lt ->
+        // 从数据库加载所有链接类型，并存入缓存
+        linkTypeMapper.selectList(null).forEach(lt ->
                 typeCache.put(lt.getId(), lt.getName()));
     }
 
@@ -61,13 +64,18 @@ public class RssServiceImpl implements RssService {
         // 线程安全的列表，用于收集所有RSS条目
         List<Rss> rssList = Collections.synchronizedList(new ArrayList<>());
 
-        // 从数据库获取所有链�?        List<Link> linkList = linkMapper.selectList(null);
+        // 从数据库获取所有链接
+        List<Link> linkList = linkMapper.selectList(null);
 
-        // 为每个有RSS地址的链接创建异步任�?        List<CompletableFuture<Void>> futures = linkList.stream()
-                .filter(link -> link.getRss() != null)  // 过滤掉没有RSS地址的链�?                .map(link -> CompletableFuture.runAsync(() ->
-                        processFeedWithTimeout(link, rssList), executorService))  // 异步处理每个RSS�?                .collect(Collectors.toList());
+        // 为每个有 RSS 地址的链接创建异步任务
+        List<CompletableFuture<Void>> futures = linkList.stream()
+                .filter(link -> link.getRss() != null)  // 过滤掉没有 RSS 地址的链接
+                .map(link -> CompletableFuture.runAsync(() ->
+                        processFeedWithTimeout(link, rssList), executorService))  // 异步处理每个 RSS 内容
+                .collect(Collectors.toList());
 
-        // 等待所有异步任务完�?        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        // 等待所有异步任务完成
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
         // 按发布时间降序排序后返回
         return rssList.stream()
@@ -76,14 +84,14 @@ public class RssServiceImpl implements RssService {
     }
 
     // 定时任务更新缓存
-    @Scheduled(fixedRate = 3600000) // 每小时更新一�?    @CacheEvict(value = "rssCache", key = "'allFeeds'")
+    @Scheduled(fixedRate = 3600000) // 每小时更新一�?    @CacheEvict(value = "rssCache", key = "'allFeeds'")
     public void evictCache() {
     }
 
     /**
      * 处理单个RSS源，带有超时控制
      *
-     * @param link    包含RSS地址的链接对�?     * @param rssList 用于收集结果的列�?     */
+     * @param link    包含RSS地址的链接对�?     * @param rssList 用于收集结果的列�?     */
     private void processFeedWithTimeout(Link link, List<Rss> rssList) {
         try {
             HttpURLConnection connection = (HttpURLConnection)
@@ -94,7 +102,7 @@ public class RssServiceImpl implements RssService {
             try (InputStream input = connection.getInputStream()) {
                 SyndFeed feed = new SyndFeedInput().build(new XmlReader(input));
 
-                // 使用Stream处理并限制数�?                List<Rss> limitedItems = feed.getEntries().stream()
+                // 使用Stream处理并限制数�?                List<Rss> limitedItems = feed.getEntries().stream()
                         .sorted(Comparator.comparing(SyndEntry::getPublishedDate).reversed())
                         .limit(5)
                         .map(data -> {
@@ -121,11 +129,13 @@ public class RssServiceImpl implements RssService {
 
     @Override
     public Page<Rss> paging(PageVo pageVo) {
-        // 使用工具类进行分�?        return yuYangUtils.getPageData(pageVo, list());
+        // 使用工具类进行分页
+        return yuYangUtils.getPageData(pageVo, list());
     }
 
     /**
-     * Bean销毁前的清理方�?     * 关闭线程池，释放资源
+     * Bean 销毁前的清理方法
+     * 关闭线程池，释放资源
      */
     @PreDestroy
     public void shutdown() {

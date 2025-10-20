@@ -37,8 +37,8 @@ public class OssController {
     @ApiOperationSupport(author = "laifeng", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         Oss oss = ossService.getById(id);
-        if (oss == null) return Result.error("删除oss配置失败：该配置不存�?);
-        if (oss.getIsEnable() == 1) return Result.error("删除oss配置失败：该配置正在使用�?);
+        if (oss == null) return Result.error("删除oss配置失败：该配置不存在");
+        if (oss.getIsEnable() == 1) return Result.error("删除oss配置失败：该配置正在使用中");
         ossService.delOss(id);
         return Result.success();
     }
@@ -59,7 +59,7 @@ public class OssController {
     public Result<OssVo> get(@PathVariable Integer id) {
         Oss oss = ossService.getById(id);
         if (oss == null) {
-            return Result.error("获取oss配置失败：该配置不存�?);
+            return Result.error("获取oss配置失败：该配置不存在");
         }
         OssVo vo = new OssVo();
         BeanUtils.copyProperties(oss, vo);

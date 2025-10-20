@@ -30,7 +30,7 @@ public class Oss {
     @ApiModelProperty(value = "地域")
     private String endPoint;
 
-    @ApiModelProperty(value = "存储�?)
+    @ApiModelProperty(value = "存储桶")
     private String bucketName;
 
     @ApiModelProperty(value = "域名")
@@ -40,7 +40,8 @@ public class Oss {
     private String basePath;
 
     /**
-     * 是否启用 0:禁用 1：启�?     */
-    @ApiModelProperty(value = "是否启用 0:禁用 1：启�?)
+     * 是否启用 0:禁用 1：启用
+     */
+    @ApiModelProperty(value = "是否启用 0:禁用 1：启用")
     private Integer isEnable;
 }

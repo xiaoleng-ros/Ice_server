@@ -29,7 +29,7 @@ public class EnvConfigServiceImpl extends ServiceImpl<EnvConfigMapper, EnvConfig
             wrapper.eq(EnvConfig::getName, name);
             return this.getOne(wrapper);
         } catch (Exception e) {
-            throw new CustomException(String.format("获取%s配置失败�?s", name, e.getMessage()));
+            throw new CustomException(String.format("获取 %s 配置失败：%s", name, e.getMessage()));
         }
     }
 
@@ -71,4 +71,4 @@ public class EnvConfigServiceImpl extends ServiceImpl<EnvConfigMapper, EnvConfig
         }
         return false;
     }
-} 
+}

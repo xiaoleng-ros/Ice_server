@@ -18,7 +18,7 @@ public class User extends BaseModel {
     @ApiModelProperty(value = "用户名称", example = "宇阳", required = true)
     private String name;
 
-    @ApiModelProperty(value = "用户介绍", example = "再渺小的星光，也有属于他的光�?")
+    @ApiModelProperty(value = "用户介绍", example = "再渺小的星光，也有属于他的光芒")
     private String info;
 
     @ApiModelProperty(value = "用户邮箱", example = "liuyuyang1024@yeah.net")

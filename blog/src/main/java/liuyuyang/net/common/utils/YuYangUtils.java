@@ -35,8 +35,8 @@ public class YuYangUtils {
     }
 
     /**
-     * 获取Header的�?     *
-     * @param name 请求头名�?     * @return 请求�?     */
+     * 获取Header的�?     *
+     * @param name 请求头名�?     * @return 请求�?     */
     public static String getHeader(String name) {
         HttpServletRequest request = getRequest();
         return Objects.requireNonNull(request).getHeader(name);
@@ -50,7 +50,8 @@ public class YuYangUtils {
         return isAdmin(token);
     }
 
-    // 鉴权：判断是否为超级管理�?    public static boolean isAdmin(String token) {
+    // 鉴权：判断是否为超级管理员
+    public static boolean isAdmin(String token) {
         if (token != null) {
             if (token.startsWith("Bearer ")) token = token.substring(7);
             Claims claims = JwtUtils.parseJWT(token);
@@ -85,11 +86,12 @@ public class YuYangUtils {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("create_time");
 
-        // 根据关键字通过标题过滤出对应数�?        if (filterVo.getKey() != null && !filterVo.getKey().isEmpty()) {
+        // 根据关键字通过标题过滤出对应数据
+        if (filterVo.getKey() != null && !filterVo.getKey().isEmpty()) {
             queryWrapper.like(key, "%" + filterVo.getKey() + "%");
         }
 
-        // 根据开始与结束时间过滤
+        // 时间过滤（开始/结束）
         if (filterVo.getStartDate() != null && filterVo.getEndDate() != null) {
             queryWrapper.between("create_time", filterVo.getStartDate(), filterVo.getEndDate());
         } else if (filterVo.getStartDate() != null) {

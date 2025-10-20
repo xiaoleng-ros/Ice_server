@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class UserFilterVo extends FilterVo {
-    @ApiModelProperty(value = "根据角色进行筛�?)
+    @ApiModelProperty(value = "根据角色进行筛选")
     private Integer roleId;
 }

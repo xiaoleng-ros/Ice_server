@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class Rss {
-    @ApiModelProperty(value = "作�?, example = "宇阳")
+    @ApiModelProperty(value = "作者", example = "宇阳")
     private String author;
     @ApiModelProperty(value = "网站图片", example = "http://127.0.0.1:5000/1.jpg")
     private String image;
@@ -13,7 +13,7 @@ public class Rss {
     private String email;
     @ApiModelProperty(value = "网站类型", example = "技术类")
     private String type;
-    @ApiModelProperty(value = "网站标题", example = "这是一个网�?)
+    @ApiModelProperty(value = "网站标题", example = "这是一个网站")
     private String title;
     @ApiModelProperty(value = "网站描述", example = "这是一个网站的描述")
     private String description;

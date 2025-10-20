@@ -41,7 +41,7 @@ public class WallServiceImpl extends ServiceImpl<WallMapper, Wall> implements Wa
     @Override
     public Wall get(Integer id) {
         Wall data = wallMapper.selectById(id);
-        if (data == null) throw new CustomException(400, "该留言不存�?);
+        if (data == null) throw new CustomException(400, "该留言不存在");
         data.setCate(wallCateMapper.selectById(data.getCateId()));
         return data;
     }
@@ -113,7 +113,7 @@ public class WallServiceImpl extends ServiceImpl<WallMapper, Wall> implements Wa
         Wall wall = wallMapper.selectById(id);
         if (wall == null) throw new CustomException("没有这条留言");
 
-        // 如果是精选则取消，否则设�?        if (wall.getIsChoice() == 0) {
+        // 如果是精选则取消，否则设�?        if (wall.getIsChoice() == 0) {
             wall.setIsChoice(1);
         } else {
             wall.setIsChoice(0);

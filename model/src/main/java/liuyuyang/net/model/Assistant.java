@@ -22,6 +22,6 @@ public class Assistant {
     private String url;
     @ApiModelProperty(value = "API 模型", example = "deepseek-chat")
     private String model;
-    @ApiModelProperty(value = "设置默认助手", example = "默认�?，选择�?")
+    @ApiModelProperty(value = "设置默认助手", example = "默认0，选择1")
     private Integer isDefault = 0;
 }
