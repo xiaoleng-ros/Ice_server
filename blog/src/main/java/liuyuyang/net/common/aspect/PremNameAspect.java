@@ -41,66 +41,68 @@ public class PremNameAspect {
     private RolePermissionMapper rolePermissionMapper;
 
     // 定义切点，支持类和方法上的注解
-    // @Pointcut("@within(liuyuyang.net.common.annotation.PremName) || @annotation(liuyuyang.net.common.annotation.PremName)")
-    private void cut() {
-    }
+    @Pointcut("@within(liuyuyang.net.common.annotation.PremName) || @annotation(liuyuyang.net.common.annotation.PremName)")
+    private void cut() {}
 
     @Before("cut()")
     public void before(JoinPoint joinPoint) {
         // 获取方法上的 @PremName 注解
-        Optional<PremName> nameOpt = Optional.of(getMethodAnnotation(joinPoint).get());
-
-        // 如果注解存在，进行权限验证        nameOpt.ifPresent(name -> {
+        Optional<PremName> nameOpt = getMethodAnnotation(joinPoint);
+    
+        // 如果注解存在，进行权限验证
+        nameOpt.ifPresent(name -> {
             // 当前接口的权限名
             String prem = name.value();
             log.info("权限名称:{}", prem);
-
+    
             // 获取当前请求的上下文
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             if (attributes != null) {
                 HttpServletRequest request = attributes.getRequest();
                 HttpServletResponse response = attributes.getResponse();
-
+    
                 Map<String, Object> role;
-
-                // 解析 token 并获取角色信息                try {
+    
+                // 解析 token 并获取角色信息
+                try {
                     // 获取请求头中的 token
                     String token = request.getHeader("Authorization");
                     log.debug("Authorization Header: {}", token);
-
-                    // 如果 token 为 null，跳过权限校验                    if (token == null) {
-                        log.info("Token为空,跳过权限校验");
+    
+                    if (token == null) {
+                        if (response != null) response.setStatus(401);
                         throw new CustomException("Token 不能为空");
                     }
-
+    
                     // 去掉 Bearer 前缀
                     if (token.startsWith("Bearer ")) {
                         token = token.substring(7);
                     }
-
+    
                     Claims claims = JwtUtils.parseJWT(token);
                     role = (Map<String, Object>) claims.get("role");
                 } catch (Exception e) {
-                    response.setStatus(401);
+                    if (response != null) response.setStatus(401);
                     throw new CustomException(401, e.getMessage());
                 }
-
+    
                 String mark = (String) role.get("mark");
-
-                // 如果是管理员，则不需要权限校验                if (Objects.equals(mark, "admin")) return;
-
-                // 查询当前角色的权限                LambdaQueryWrapper<RolePermission> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+                // 如果是管理员，则不需要权限校验
+                if ("admin".equals(mark)) return;
+    
+                // 查询当前角色的权限
+                LambdaQueryWrapper<RolePermission> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
                 roleLambdaQueryWrapper.eq(RolePermission::getRoleId, role.get("id"));
-                // 当前角色能访问的所有权限                List<Permission> role_permissions = roleMapper.getPermissionList((int) role.get("id"));
-
+                List<Permission> role_permissions = roleMapper.getPermissionList((int) role.get("id"));
+    
                 // 判断当前 prem 权限是否存在于 role_permissions，通过 name 判断
                 boolean hasPermission = role_permissions.stream()
                         .anyMatch(permission -> permission.getName().equals(prem));
-
+    
                 if (!hasPermission) {
                     throw new CustomException(400, "当前角色没有权限:" + prem);
                 }
-
+    
                 log.info("角色ID:{}", role.get("id"));
             }
         });
@@ -108,11 +110,17 @@ public class PremNameAspect {
 
     // 获取当前方法上的 @PremName 注解
     private Optional<PremName> getMethodAnnotation(JoinPoint joinPoint) {
-        return Optional.ofNullable(getCurrentMethod(joinPoint))
-                .map(method -> method.getAnnotation(PremName.class));
+        Method method = getCurrentMethod(joinPoint);
+        if (method != null) {
+            PremName methodAnn = method.getAnnotation(PremName.class);
+            if (methodAnn != null) return Optional.of(methodAnn);
+        }
+        PremName classAnn = joinPoint.getTarget().getClass().getAnnotation(PremName.class);
+        return Optional.ofNullable(classAnn);
     }
 
-    // 获取当前执行的方法对�?    private Method getCurrentMethod(JoinPoint joinPoint) {
+    // 获取当前执行的方法对？
+    private Method getCurrentMethod(JoinPoint joinPoint) {
         try {
             String methodName = joinPoint.getSignature().getName();
             Class<?> targetClass = joinPoint.getTarget().getClass();

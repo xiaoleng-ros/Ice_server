@@ -163,7 +163,8 @@ public class OssUtils {
         list.add(imgtpStorage);
     }
 
-    // 加载指定的存储平台配置    public static void registerPlatform(Oss oss) {
+    // 加载指定的存储平台配置
+    public static void registerPlatform(Oss oss) {
         switch (oss.getPlatform()) {
             case "local":
                 setPlatformToDefault(oss);

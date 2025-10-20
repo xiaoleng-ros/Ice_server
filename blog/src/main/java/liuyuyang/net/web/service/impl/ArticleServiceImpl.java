@@ -243,7 +243,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
             // 如果有密码就必须通过密码才能查看
             if (data.getConfig().getIsEncrypt() == 1) {
-                // 如果需要访问密码且没有传递密码参数                if (password.isEmpty()) {
+                // 如果需要访问密码且没有传递密码参数
+                if (password.isEmpty()) {
                     throw new CustomException(612, "请输入文章访问密码");
                 }
 
@@ -261,14 +262,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             }
         }
 
-        // 获取当前文章的创建时间        String createTime = data.getCreateTime();
+        // 获取当前文章的创建时间
+        String createTime = data.getCreateTime();
 
-        // 查询上一篇文章        QueryWrapper<Article> prevQueryWrapper = new QueryWrapper<>();
+        // 查询上一篇文章
+        QueryWrapper<Article> prevQueryWrapper = new QueryWrapper<>();
         prevQueryWrapper.lt("create_time", createTime).orderByDesc("create_time").last("LIMIT 1");
         Article prevArticle = articleMapper.selectOne(prevQueryWrapper);
 
         if (prevArticle != null) {
-            // 检查文章是否存在            QueryWrapper<ArticleConfig> prevConfigWrapper = new QueryWrapper<>();
+            // 检查文章是否存在
+            QueryWrapper<ArticleConfig> prevConfigWrapper = new QueryWrapper<>();
             prevConfigWrapper.eq("article_id", prevArticle.getId()).eq("is_del", 0);
             ArticleConfig prevConfig = articleConfigMapper.selectOne(prevConfigWrapper);
 
@@ -280,12 +284,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             }
         }
 
-        // 查询下一篇文章        QueryWrapper<Article> nextQueryWrapper = new QueryWrapper<>();
+        // 查询下一篇文章
+        QueryWrapper<Article> nextQueryWrapper = new QueryWrapper<>();
         nextQueryWrapper.gt("create_time", createTime).orderByAsc("create_time").last("LIMIT 1");
         Article nextArticle = articleMapper.selectOne(nextQueryWrapper);
 
         if (nextArticle != null) {
-            // 检查文章是否存在            QueryWrapper<ArticleConfig> nextConfigWrapper = new QueryWrapper<>();
+            // 检查文章是否存在
+            QueryWrapper<ArticleConfig> nextConfigWrapper = new QueryWrapper<>();
             nextConfigWrapper.eq("article_id", nextArticle.getId()).eq("is_del", 0);
             ArticleConfig nextConfig = articleConfigMapper.selectOne(nextConfigWrapper);
 
@@ -305,11 +311,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         // 首先根据文章配置表的条件筛选出符合条件的文章ID
         QueryWrapper<ArticleConfig> configQueryWrapper = new QueryWrapper<>();
 
-        // 根据草稿状态筛选文章        if (filterVo.getIsDraft() != null) {
+        // 根据草稿状态筛选文章
+        if (filterVo.getIsDraft() != null) {
             configQueryWrapper.eq("is_draft", filterVo.getIsDraft());
         }
 
-        // 根据删除状态筛选文章        if (filterVo.getIsDel() != null) {
+        // 根据删除状态筛选文章
+        if (filterVo.getIsDel() != null) {
             configQueryWrapper.eq("is_del", filterVo.getIsDel());
         }
 
