@@ -37,6 +37,8 @@
         <oshi.version>6.2.2</oshi.version>
         <qiniu.version>7.13.0</qiniu.version>
         <email.version>2.7.12</email.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本-->
@@ -166,6 +168,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>
