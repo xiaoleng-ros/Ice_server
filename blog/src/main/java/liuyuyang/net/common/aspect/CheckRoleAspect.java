@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +25,7 @@ import java.util.Map;
 public class CheckRoleAspect {
 
 
-    // 定义切点，支持类和方法上的注解
-    @Pointcut("@within(liuyuyang.net.common.annotation.CheckRole) || @annotation(liuyuyang.net.common.annotation.CheckRole)")
+    // 定义切点，支持类和方法上的注�?    @Pointcut("@within(liuyuyang.net.common.annotation.CheckRole) || @annotation(liuyuyang.net.common.annotation.CheckRole)")
     private void cut() {
     }
 
@@ -64,7 +63,7 @@ public class CheckRoleAspect {
                 boolean isPerm = rolesList.contains(role.get("mark"));
 
                 if (!isPerm) {
-                    throw new CustomException(401, "该权限仅限于： " + String.join(", ", rolesList) + " 角色");
+                    throw new CustomException(401, "该权限仅限于�?" + String.join(", ", rolesList) + " 角色");
                 }
             }
         }

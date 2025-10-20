@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 
@@ -38,9 +38,9 @@ public class FileController {
     @PremName("file:add")
     @PostMapping
     @ApiOperation("文件上传")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 1)
     public Result<Object> add(@RequestParam(defaultValue = "") String dir, @RequestParam MultipartFile[] files) throws IOException {
-        if (dir == null || dir.trim().isEmpty()) throw new CustomException(400, "请指定一个目录");
+        if (dir == null || dir.trim().isEmpty()) throw new CustomException(400, "请指定一个目�?);
 
         List<String> urls = new ArrayList<>();
 
@@ -56,13 +56,13 @@ public class FileController {
             urls.add(url.startsWith("https://") ? url : "https://" + url);
         }
 
-        return Result.success("文件上传成功：", urls);
+        return Result.success("文件上传成功�?, urls);
     }
 
     @PremName("file:del")
     @DeleteMapping
     @ApiOperation("删除文件")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 2)
     public Result<String> del(@RequestParam String filePath) {
         String url = filePath.startsWith("https://") ? filePath : "https://" + filePath;
         boolean delete = fileStorageService.delete(url);
@@ -72,7 +72,7 @@ public class FileController {
     @PremName("file:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除文件")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 3)
     public Result batchDel(@RequestBody String[] pathList) throws QiniuException {
         for (String url : pathList) {
             boolean delete = fileStorageService.delete(url.startsWith("https://") ? url : "https://" + url);
@@ -84,7 +84,7 @@ public class FileController {
     @PremName("file:info")
     @GetMapping("/info")
     @ApiOperation("获取文件信息")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
     public Result<FileInfo> get(@RequestParam String filePath) throws QiniuException {
         FileInfo fileInfo = fileStorageService.getFileInfoByUrl(filePath);
         return Result.success(fileInfo);
@@ -93,7 +93,7 @@ public class FileController {
     @PremName("file:dir")
     @GetMapping("/dir")
     @ApiOperation("获取目录列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 5)
     public Result<List<Map>> getDirList() {
         ListFilesResult result = fileStorageService.listFiles()
                 .setPlatform(OssUtils.getPlatform())
@@ -116,13 +116,13 @@ public class FileController {
     @PremName("file:list")
     @GetMapping("/list")
     @ApiOperation("获取指定目录中的文件")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 5)
     public Result<Map<String, Object>> getFileList(
             @RequestParam String dir,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "20") Integer size
     ) {
-        if (dir == null || dir.trim().isEmpty()) throw new CustomException(400, "请指定一个目录");
+        if (dir == null || dir.trim().isEmpty()) throw new CustomException(400, "请指定一个目�?);
 
         ListFilesResult result = fileStorageService.listFiles()
                 .setPlatform(OssUtils.getPlatform())
@@ -133,8 +133,7 @@ public class FileController {
         List<Map<String, Object>> fileList = new ArrayList<>();
         List<RemoteFileInfo> remoteFileList = result.getFileList();
 
-        // 按lastModified时间降序排序（最新的在前）
-        remoteFileList.sort((a, b) -> b.getLastModified().compareTo(a.getLastModified()));
+        // 按lastModified时间降序排序（最新的在前�?        remoteFileList.sort((a, b) -> b.getLastModified().compareTo(a.getLastModified()));
 
         // 计算分页参数
         int total = remoteFileList.size();

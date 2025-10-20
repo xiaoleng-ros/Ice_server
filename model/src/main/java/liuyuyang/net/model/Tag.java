@@ -14,7 +14,7 @@ public class Tag {
     @ApiModelProperty(value = "标签ID")
 
     private Integer id;
-    @ApiModelProperty(value = "标签名称", example = "这是一个标签", required = true)
+    @ApiModelProperty(value = "标签名称", example = "这是一个标�?, required = true)
     private String name;
 
     @TableField(exist = false)

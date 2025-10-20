@@ -11,8 +11,7 @@ public class CustomException extends RuntimeException {
     private String message;
 
     /**
-     * 通过状态码和错误消息创建异常对象
-     *
+     * 通过状态码和错误消息创建异常对�?     *
      * @param code
      * @param message
      */

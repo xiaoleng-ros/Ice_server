@@ -63,8 +63,7 @@ public class OssUtils {
 
 
     /**
-     * 将阿里云配置信息设置到存储平台
-     */
+     * 将阿里云配置信息设置到存储平�?     */
     public static void setAliyunConfig(Oss oss) {
         CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
         FileStorageProperties.AliyunOssConfig config = new FileStorageProperties.AliyunOssConfig();
@@ -80,8 +79,7 @@ public class OssUtils {
     }
 
     /**
-     * 将千牛云配置信息设置到存储平台
-     */
+     * 将千牛云配置信息设置到存储平�?     */
     public static void setQiniuConfig(Oss oss) {
         CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
         FileStorageProperties.QiniuKodoConfig config = new FileStorageProperties.QiniuKodoConfig();
@@ -96,8 +94,7 @@ public class OssUtils {
     }
 
     /**
-     * 将腾讯云配置信息设置到存储平台
-     */
+     * 将腾讯云配置信息设置到存储平�?     */
     public static void setTencentConfig(Oss oss) {
         CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
         FileStorageProperties.TencentCosConfig config = new FileStorageProperties.TencentCosConfig();
@@ -113,8 +110,7 @@ public class OssUtils {
     }
 
     /**
-     * 将minio配置信息设置到存储平台
-     */
+     * 将minio配置信息设置到存储平�?     */
     public static void setMinioConfig(Oss oss) {
         CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
         FileStorageProperties.MinioConfig config = new FileStorageProperties.MinioConfig();
@@ -130,8 +126,7 @@ public class OssUtils {
     }
 
     /**
-     * 将SM.MS配置信息设置到存储平台
-     */
+     * 将SM.MS配置信息设置到存储平�?     */
     public static void setSmmsConfig(Oss oss) {
         CopyOnWriteArrayList<FileStorage> list = fileStorageService.getFileStorageList();
         SmmsConfig config = new SmmsConfig();
@@ -163,8 +158,7 @@ public class OssUtils {
         list.add(imgtpStorage);
     }
 
-    // 加载指定的平台
-    public static void registerPlatform(Oss oss) {
+    // 加载指定的平�?    public static void registerPlatform(Oss oss) {
         switch (oss.getPlatform()) {
             case "local":
                 setPlatformToDefault(oss);
@@ -200,7 +194,7 @@ public class OssUtils {
                 return;
         }
 
-        throw new RuntimeException("暂不支持该平台");
+        throw new RuntimeException("暂不支持该平�?);
     }
 
     /**

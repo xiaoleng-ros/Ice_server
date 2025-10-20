@@ -8,7 +8,7 @@ public class AlbumImageAddFormDTO {
     @ApiModelProperty(value = "相册名称", example = "旅行", required = true)
     private String name;
 
-    @ApiModelProperty(value = "相册介绍", example = "青春没有售价，泰山就在脚下")
+    @ApiModelProperty(value = "相册介绍", example = "青春没有售价，泰山就在脚�?)
     private String description;
 
     @ApiModelProperty(value = "相册地址", example = "http://123.com/images/example.jpg")

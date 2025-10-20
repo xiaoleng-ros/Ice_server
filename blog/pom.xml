@@ -99,6 +99,13 @@
             <artifactId>model</artifactId>
         </dependency>
 
+        <!-- hutool 工具类库 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.16</version>
+        </dependency>
+
         <!--  存储oss使用 https://x-file-storage.xuyanwu.cn/#/      -->
         <dependency>
             <groupId>org.dromara.x-file-storage</groupId>

@@ -3,7 +3,7 @@ package liuyuyang.net.common.utils;
 import lombok.Data;
 
 /**
- * 路过图床配置类
+ * 路过图床配置�?
  * @author laifeng
  * @version 1.0
  * @date 2024/12/10 21:21

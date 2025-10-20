@@ -14,7 +14,7 @@ import liuyuyang.net.common.utils.Paging;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class AlbumImageController {
     @PremName("album_image:add")
     @PostMapping
     @ApiOperation("新增照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 1)
     public Result<String> add(@RequestBody AlbumImageAddFormDTO albumImageAddFormDTO) {
         albumImageService.add(albumImageAddFormDTO);
         return Result.success();
@@ -38,7 +38,7 @@ public class AlbumImageController {
     @PremName("album_image:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         albumImageService.del(id);
         return Result.success();
@@ -47,7 +47,7 @@ public class AlbumImageController {
     @PremName("album_image:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 3)
     public Result<String> batchDel(@RequestBody List<Integer> ids) {
         albumImageService.batchDel(ids);
         return Result.success();
@@ -56,7 +56,7 @@ public class AlbumImageController {
     @PremName("album_image:edit")
     @PatchMapping
     @ApiOperation("编辑照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
     public Result<String> edit(@RequestBody AlbumImage albumImage) {
         albumImageService.edit(albumImage);
         return Result.success();
@@ -64,7 +64,7 @@ public class AlbumImageController {
 
     @GetMapping("/{id}")
     @ApiOperation("获取照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 5)
     public Result<AlbumImage> get(@PathVariable Integer id) {
         AlbumImage albumImage = albumImageService.get(id);
         return Result.success(albumImage);
@@ -73,7 +73,7 @@ public class AlbumImageController {
     @NoTokenRequired
     @PostMapping("/list")
     @ApiOperation("获取照片列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 6)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 6)
     public Result<List<AlbumImage>> list() {
         List<AlbumImage> albumImages = albumImageService.list();
         return Result.success(albumImages);
@@ -82,7 +82,7 @@ public class AlbumImageController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询照片列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 7)
     public Result paging(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         Page<AlbumImage> data = albumImageService.paging(page, size);
         Map<String, Object> result = Paging.filter(data);

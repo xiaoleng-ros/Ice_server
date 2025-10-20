@@ -11,7 +11,7 @@ public class CateFormDTO {
     @TableId(type = IdType.AUTO)
     @ApiModelProperty(value = "分类ID")
     private Integer id;
-    @ApiModelProperty(value = "分类名称", example = "大前端", required = true)
+    @ApiModelProperty(value = "分类名称", example = "大前�?, required = true)
     private String name;
     @ApiModelProperty(value = "分类链接", example = "/")
     private String url;

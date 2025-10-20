@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -98,8 +98,7 @@ public class StatisServiceImpl implements StatisService {
     /**
      * 处理日期参数
      *
-     * @param startDate 开始日期
-     * @param endDate   结束日期
+     * @param startDate 开始日�?     * @param endDate   结束日期
      * @return 处理后的日期数组 [startDate, endDate]
      */
     private String[] processDateParams(String startDate, String endDate) {
@@ -147,7 +146,7 @@ public class StatisServiceImpl implements StatisService {
                 "gran=day&area=",
                 startDate,
                 endDate,
-                "新访客趋势报表"
+                "新访客趋势报�?
         );
     }
 

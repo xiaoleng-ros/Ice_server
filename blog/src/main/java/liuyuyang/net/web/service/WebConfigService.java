@@ -19,8 +19,7 @@ public interface WebConfigService extends IService<WebConfig> {
     List<WebConfig> list();
 
     /**
-     * 更新 JSON 配置值
-     */
+     * 更新 JSON 配置�?     */
     boolean updateJsonValue(Integer id, Map<String, Object> jsonValue);
 
     /**

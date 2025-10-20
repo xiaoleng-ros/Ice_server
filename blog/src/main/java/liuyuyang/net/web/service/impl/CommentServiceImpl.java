@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -51,13 +51,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
         // 评论记录
         StringBuilder content = new StringBuilder();
-        // 判断是否还有上一条评论
-        Comment prev_comment = null;
+        // 判断是否还有上一条评�?        Comment prev_comment = null;
         if (comment.getCommentId() != 0) {
             prev_comment = commentMapper.selectById(comment.getCommentId());
-            content.append(prev_comment.getName()).append("：").append(prev_comment.getContent()).append("<br>");
+            content.append(prev_comment.getName()).append("�?).append(prev_comment.getContent()).append("<br>");
         }
-        content.append(comment.getName()).append("：").append(comment.getContent());
+        content.append(comment.getName()).append("�?).append(comment.getContent());
 
         // 处理邮件模板
         Context context = new Context();
@@ -66,7 +65,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
         // 获取当前时间
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd�?HH:mm:ss");
         String time = now.format(formatter);
         context.setVariable("time", time);
 
@@ -95,13 +94,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new CustomException(400, "该评论不存在");
         }
 
-        // 获取所有相关评论
-        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        // 获取所有相关评�?        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("article_id", data.getArticleId());
         List<Comment> list = commentMapper.selectList(queryWrapper);
 
-        // 构建评论树
-        data.setChildren(buildCommentTree(list, data.getId()));
+        // 构建评论�?        data.setChildren(buildCommentTree(list, data.getId()));
 
         return data;
     }
@@ -117,13 +114,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         List<Comment> list = commentMapper.selectList(queryWrapper);
 
         for (Comment data : list) {
-            // 绑定对应的数据
-            Article article = articleMapper.selectById(data.getArticleId());
+            // 绑定对应的数�?            Article article = articleMapper.selectById(data.getArticleId());
             if (article != null) data.setArticleTitle(article.getTitle());
         }
 
-        // 查询的结构格式
-        if (Objects.equals(filterVo.getPattern(), "list")) return list;
+        // 查询的结构格�?        if (Objects.equals(filterVo.getPattern(), "list")) return list;
 
         // 构建多级评论
         return buildCommentTree(list, 0);
@@ -144,8 +139,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
         List<Comment> list = commentMapper.selectList(queryWrapper);
 
-        // 构建评论树
-        list = buildCommentTree(list, 0);
+        // 构建评论�?        list = buildCommentTree(list, 0);
 
         // 分页处理
         return yuYangUtils.getPageData(pageVo, list);

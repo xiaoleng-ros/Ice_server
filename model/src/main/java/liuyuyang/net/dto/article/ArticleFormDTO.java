@@ -35,7 +35,7 @@ public class ArticleFormDTO {
     private List<Integer> tagIds;
 
     @TableField(exist = false)
-    @ApiModelProperty(value = "文章配置项")
+    @ApiModelProperty(value = "文章配置�?)
     private ArticleConfig config;
 
     @ApiModelProperty(value = "创建时间", example = "1723533206613", required = true)

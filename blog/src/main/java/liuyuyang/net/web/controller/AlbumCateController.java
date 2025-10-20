@@ -15,7 +15,7 @@ import liuyuyang.net.common.utils.Paging;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class AlbumCateController {
     @PremName("album_cate:add")
     @PostMapping
     @ApiOperation("新增相册")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 1)
     public Result<String> add(@RequestBody AlbumCateAddFormDTO albumCateAddFormDTO) {
         albumCateService.add(albumCateAddFormDTO);
         return Result.success();
@@ -39,7 +39,7 @@ public class AlbumCateController {
     @PremName("album_cate:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除相册")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         albumCateService.del(id);
         return Result.success();
@@ -48,7 +48,7 @@ public class AlbumCateController {
     @PremName("album_cate:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除相册")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 3)
     public Result<String> batchDel(@RequestBody List<Integer> ids) {
         albumCateService.batchDel(ids);
         return Result.success();
@@ -57,7 +57,7 @@ public class AlbumCateController {
     @PremName("album_cate:edit")
     @PatchMapping
     @ApiOperation("编辑相册")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
     public Result<String> edit(@RequestBody AlbumCate albumCate) {
         albumCateService.edit(albumCate);
         return Result.success();
@@ -65,7 +65,7 @@ public class AlbumCateController {
 
     @GetMapping("/{id}")
     @ApiOperation("获取相册")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 5)
     public Result<AlbumCate> get(@PathVariable Integer id) {
         AlbumCate albumCate = albumCateService.get(id);
         if (albumCate == null) return Result.error("该相册不存在");
@@ -75,7 +75,7 @@ public class AlbumCateController {
     @NoTokenRequired
     @PostMapping("/list")
     @ApiOperation("获取相册列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 6)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 6)
     public Result<List<AlbumCate>> list() {
         List<AlbumCate> albumCates = albumCateService.list();
         return Result.success(albumCates);
@@ -84,7 +84,7 @@ public class AlbumCateController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询相册列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 7)
     public Result paging(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         Page<AlbumCate> data = albumCateService.paging(page, size);
         Map<String, Object> result = Paging.filter(data);
@@ -93,8 +93,8 @@ public class AlbumCateController {
 
     @NoTokenRequired
     @GetMapping("/{id}/images")
-    @ApiOperation("获取指定相册中的所有照片")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 8)
+    @ApiOperation("获取指定相册中的所有照�?)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 8)
     public Result getImagesByAlbumId(@PathVariable Integer id, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         Page<AlbumImage> data = albumCateService.getImagesByAlbumId(id, page, size);
         Map<String, Object> result = Paging.filter(data);

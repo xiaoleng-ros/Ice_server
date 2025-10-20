@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.Map;
 import java.util.Properties;
 
@@ -46,13 +46,12 @@ public class MailConfig {
             return "YEAH";
         }
         else {
-            throw new RuntimeException("不支持的邮箱服务商！当前仅支持QQ邮箱(@qq.com)、163邮箱(@163.com)和yeah邮箱(@yeah.net)");
+            throw new RuntimeException("不支持的邮箱服务商！当前仅支持QQ邮箱(@qq.com)�?63邮箱(@163.com)和yeah邮箱(@yeah.net)");
         }
     }
 
     /**
-     * 根据邮箱服务商配置SMTP属性
-     */
+     * 根据邮箱服务商配置SMTP属�?     */
     private void configureSmtpProperties(Properties props, String provider, Integer port) {
         // 基础配置
         props.put("mail.smtp.auth", true);
@@ -72,11 +71,10 @@ public class MailConfig {
             props.put("mail.smtp.starttls.enable", true);
             props.put("mail.smtp.starttls.required", true);
         } else {
-            throw new RuntimeException("不支持的端口！建议使用465(SSL)或587(STARTTLS)端口");
+            throw new RuntimeException("不支持的端口！建议使�?65(SSL)�?87(STARTTLS)端口");
         }
         
-        // 根据邮箱服务商配置特定属性
-        switch (provider) {
+        // 根据邮箱服务商配置特定属�?        switch (provider) {
             case "QQ":
                 System.out.println("配置QQ邮箱专用设置");
                 props.put("mail.smtp.ssl.protocols", "TLSv1.2");
@@ -122,8 +120,7 @@ public class MailConfig {
     }
 
     @Bean
-    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE) // 每次使用时重新创建
-    public JavaMailSender javaMailSender() {
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE) // 每次使用时重新创�?    public JavaMailSender javaMailSender() {
         try {
             Map<String, Object> config = getEmailConfig();
             
@@ -132,9 +129,8 @@ public class MailConfig {
             String username = (String) config.get("username");
             String password = (String) config.get("password");
             
-            // 验证邮箱服务商
-            String provider = getEmailProvider(host, username);
-            System.out.println("检测到邮箱服务商: " + provider);
+            // 验证邮箱服务�?            String provider = getEmailProvider(host, username);
+            System.out.println("检测到邮箱服务�? " + provider);
             
             // 创建邮件发送器
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -143,12 +139,11 @@ public class MailConfig {
             mailSender.setUsername(username);
             mailSender.setPassword(password);
 
-            // 配置SMTP属性
-            Properties props = mailSender.getJavaMailProperties();
+            // 配置SMTP属�?            Properties props = mailSender.getJavaMailProperties();
             configureSmtpProperties(props, provider, port);
 
             System.out.println("=== 邮件发送器配置完成 ===");
-            System.out.println("邮箱服务商: " + provider);
+            System.out.println("邮箱服务�? " + provider);
             System.out.println("SMTP主机: " + host + ":" + port);
             System.out.println("发件邮箱: " + username);
             System.out.println("SSL启用: " + props.getProperty("mail.smtp.ssl.enable"));
@@ -158,7 +153,7 @@ public class MailConfig {
             return mailSender;
         } catch (Exception e) {
             System.err.println("创建邮件发送器失败: " + e.getMessage());
-            throw new RuntimeException("邮件发送器初始化失败", e);
+            throw new RuntimeException("邮件发送器初始化失�?, e);
         }
     }
 }

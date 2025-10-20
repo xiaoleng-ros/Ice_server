@@ -9,9 +9,9 @@ public class DismissEmailDTO extends EmailDTO {
     private String subject;
     @ApiModelProperty(value = "类型", example = "友联", required = true)
     String type;
-    @ApiModelProperty(value = "接收方", example = "张三", required = true)
+    @ApiModelProperty(value = "接收�?, example = "张三", required = true)
     String recipient;
-    @ApiModelProperty(value = "评论时间", example = "2024年10月15日 14:44", required = true)
+    @ApiModelProperty(value = "评论时间", example = "2024�?0�?5�?14:44", required = true)
     String time;
     @ApiModelProperty(value = "评论内容", example = "涉嫌违规", required = true)
     String content;

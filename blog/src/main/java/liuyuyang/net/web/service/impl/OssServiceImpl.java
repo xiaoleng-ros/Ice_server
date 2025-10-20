@@ -11,7 +11,7 @@ import liuyuyang.net.common.utils.OssUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,13 +24,11 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
 
     @Override
     public void saveOss(Oss oss) {
-        // 判断是否有重复
-        Integer count = this.lambdaQuery().eq(Oss::getPlatform, oss.getPlatform()).count();
-        if (count > 0) throw new CustomException("该平台已存在，请勿重复添加");
+        // 判断是否有重�?        Integer count = this.lambdaQuery().eq(Oss::getPlatform, oss.getPlatform()).count();
+        if (count > 0) throw new CustomException("该平台已存在，请勿重复添�?);
 
         if ("local".equals(oss.getPlatform())) {
-            // 获取当前项目的路径
-            String projectPath = System.getProperty("user.dir");
+            // 获取当前项目的路�?            String projectPath = System.getProperty("user.dir");
             oss.setEndPoint(projectPath + "/");
         }
 
@@ -41,8 +39,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
     public void delOss(Integer id) {
         Oss oss = this.getById(id);
         if (oss == null) throw new CustomException("删除失败");
-        // 如果是默认的平台，提示不可删除
-        if (oss.getPlatform().equals("local")) throw new CustomException("默认平台不可删除");
+        // 如果是默认的平台，提示不可删�?        if (oss.getPlatform().equals("local")) throw new CustomException("默认平台不可删除");
         boolean result = this.removeById(id);
         if (result) OssUtils.removeStorage(OssUtils.getStorageList(), oss.getPlatform());
     }
@@ -103,8 +100,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
         String platform = oss.getPlatform();
 
         if ("local".equals(platform)) {
-            // 获取当前项目的路径
-            String projectPath = System.getProperty("user.dir");
+            // 获取当前项目的路�?            String projectPath = System.getProperty("user.dir");
             oss.setEndPoint(projectPath + "/");
 
             // 每次修改时候，如果路径不包含static则追加上
@@ -113,8 +109,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
             }
         }
 
-        // 不允许更改平台
-        oss.setPlatform(null);
+        // 不允许更改平�?        oss.setPlatform(null);
         boolean result = this.updateById(oss);
         if (result) {
             oss.setPlatform(platform);
@@ -122,7 +117,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
         }
     }
 
-    // 对数据中间10位数进行脱敏
+    // 对数据中�?0位数进行脱敏
     public String maskMiddleTen(String input) {
         if (input == null || input.length() <= 10) return input;
 
@@ -143,13 +138,13 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
             case "local":
                 return "本地存储";
             case "huawei":
-                return "华为云";
+                return "华为�?;
             case "aliyun":
-                return "阿里云";
+                return "阿里�?;
             case "qiniu":
-                return "七牛云";
+                return "七牛�?;
             case "tencent":
-                return "腾讯云";
+                return "腾讯�?;
             case "minio":
                 return "Minio";
             case "smms":

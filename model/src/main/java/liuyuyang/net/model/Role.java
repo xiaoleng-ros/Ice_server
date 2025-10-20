@@ -13,12 +13,12 @@ public class Role {
     @ApiModelProperty(value = "角色ID")
     private Integer id;
 
-    @ApiModelProperty(value = "角色名称", example = "管理员", required = true)
+    @ApiModelProperty(value = "角色名称", example = "管理�?, required = true)
     private String name;
 
     @ApiModelProperty(value = "角色标识", example = "admin", required = true)
     private String mark;
 
-    @ApiModelProperty(value = "角色描述", example = "具有所有权限的管理员角色", required = true)
+    @ApiModelProperty(value = "角色描述", example = "具有所有权限的管理员角�?, required = true)
     private String description;
 }

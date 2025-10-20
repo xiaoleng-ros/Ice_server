@@ -16,7 +16,7 @@ import liuyuyang.net.vo.link.LinkFilterVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +47,7 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
             return;
         }
 
-        // 如果没有设置 order 则放在最后
-        if (link.getOrder() == null) {
+        // 如果没有设置 order 则放在最�?        if (link.getOrder() == null) {
             // 查询当前类型下的网站数量
             LambdaQueryWrapper<Link> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(Link::getTypeId, link.getTypeId());
@@ -84,8 +83,7 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
         QueryWrapper<Link> queryWrapper = yuYangUtils.queryWrapperFilter(filterVo);
         queryWrapper.eq("audit_status", filterVo.getStatus()); // 只显示审核成功的网站
 
-        // 查询所有网站
-        List<Link> list = linkMapper.selectList(queryWrapper);
+        // 查询所有网�?        List<Link> list = linkMapper.selectList(queryWrapper);
 
         if (!list.isEmpty()) {
             for (Link link : list) {

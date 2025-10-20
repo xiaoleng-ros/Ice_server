@@ -29,8 +29,8 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User data = userMapper.selectOne(queryWrapper);
 
         // 判断用户是否存在
-        if (data != null) throw new CustomException(400, "该用户已存在：" + user.getUsername());
+        if (data != null) throw new CustomException(400, "该用户已存在�? + user.getUsername());
 
         // 密码加密
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
@@ -164,7 +164,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = userMapper.selectOne(queryWrapper);
 
         if (user == null) {
-            throw new CustomException(400, "用户名或旧密码错误");
+            throw new CustomException(400, "用户名或旧密码错�?);
         }
 
         user.setUsername(data.getNewUsername());

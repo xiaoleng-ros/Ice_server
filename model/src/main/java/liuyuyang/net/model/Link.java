@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @TableName("link")
 public class Link extends BaseModel {
-    @ApiModelProperty(value = "网站标题", example = "这是一个网站", required = true)
+    @ApiModelProperty(value = "网站标题", example = "这是一个网�?, required = true)
     private String title;
     @ApiModelProperty(value = "网站描述", example = "这是一个网站的描述", required = true)
     private String description;

@@ -11,7 +11,7 @@ import liuyuyang.net.web.service.impl.StatisServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 @Api(tags = "数据统计管理")
 @Slf4j
@@ -23,19 +23,16 @@ public class StatisController {
     private StatisServiceImpl baiduService;
 
     /**
-     * 统一的百度统计数据获取接口
-     *
-     * @param type      统计类型：basic(基础数据), overview(概览趋势), new-visitor(新访客趋势), basic-overview(基础概览趋势)
-     * @param startDate 开始日期 (格式: 20240101)，可选，默认为当天
-     * @param endDate   结束日期 (格式: 20240131)，可选，默认为当天
-     */
+     * 统一的百度统计数据获取接�?     *
+     * @param type      统计类型：basic(基础数据), overview(概览趋势), new-visitor(新访客趋�?, basic-overview(基础概览趋势)
+     * @param startDate 开始日�?(格式: 20240101)，可选，默认为当�?     * @param endDate   结束日期 (格式: 20240131)，可选，默认为当�?     */
     @GetMapping
     @ApiOperation("获取网站统计数据")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
     public Result<JsonNode> getStatisData(
-            @ApiParam(value = "统计类型：basic(基础数据), overview(概览趋势), new-visitor(新访客趋势), basic-overview(基础概览趋势)", required = true) @RequestParam String type,
-            @ApiParam(value = "开始日期，格式: 20240101，可选，默认为当天") @RequestParam(required = false) String startDate,
-            @ApiParam(value = "结束日期，格式: 20240131，可选，默认为当天") @RequestParam(required = false) String endDate
+            @ApiParam(value = "统计类型：basic(基础数据), overview(概览趋势), new-visitor(新访客趋�?, basic-overview(基础概览趋势)", required = true) @RequestParam String type,
+            @ApiParam(value = "开始日期，格式: 20240101，可选，默认为当�?) @RequestParam(required = false) String startDate,
+            @ApiParam(value = "结束日期，格�? 20240131，可选，默认为当�?) @RequestParam(required = false) String endDate
     ) {
         try {
             JsonNode data = null;
@@ -52,7 +49,7 @@ public class StatisController {
                     break;
                 case "new-visitor":
                     data = baiduService.getNewVisitorTrend(startDate, endDate);
-                    successMsg = "获取新访客趋势报表成功";
+                    successMsg = "获取新访客趋势报表成�?;
                     break;
                 case "basic-overview":
                     System.out.println("basic-overview");

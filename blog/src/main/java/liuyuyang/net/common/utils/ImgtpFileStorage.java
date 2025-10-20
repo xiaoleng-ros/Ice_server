@@ -8,12 +8,15 @@ import org.dromara.x.file.storage.core.UploadPretreatment;
 import org.dromara.x.file.storage.core.exception.FileStorageRuntimeException;
 import org.dromara.x.file.storage.core.platform.FileStorage;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.MultipartBodyBuilder;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.UUID;
@@ -27,13 +30,13 @@ import java.util.UUID;
 public class ImgtpFileStorage implements FileStorage {
     
     private final ImgtpConfig config;
-    private final HttpClient httpClient;
+    private final WebClient webClient;
     private final ObjectMapper objectMapper;
     
     public ImgtpFileStorage(ImgtpConfig config) {
         this.config = config;
-        this.httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(30))
+        this.webClient = WebClient.builder()
+                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024))
                 .build();
         this.objectMapper = new ObjectMapper();
     }
@@ -43,44 +46,26 @@ public class ImgtpFileStorage implements FileStorage {
         try {
             InputStreamPlus inputStream = uploadPretreatment.getFileWrapper().getInputStream();
             
-            // 构建multipart/form-data请求体
-            String boundary = "----WebKitFormBoundary" + UUID.randomUUID().toString().replace("-", "");
-            StringBuilder requestBody = new StringBuilder();
+            // 构建 multipart 请求体
+            MultipartBodyBuilder builder = new MultipartBodyBuilder();
+            builder.part("token", config.getSecretKey());
+            builder.part("file", inputStream.readAllBytes())
+                    .filename(fileInfo.getOriginalFilename())
+                    .contentType(MediaType.parseMediaType(fileInfo.getContentType()));
             
-            // 添加token字段
-            requestBody.append("--").append(boundary).append("\r\n");
-            requestBody.append("Content-Disposition: form-data; name=\"token\"\r\n\r\n");
-            requestBody.append(config.getSecretKey()).append("\r\n");
-            
-            // 添加文件字段
-            requestBody.append("--").append(boundary).append("\r\n");
-            requestBody.append("Content-Disposition: form-data; name=\"file\"; filename=\"")
-                    .append(fileInfo.getOriginalFilename()).append("\"\r\n");
-            requestBody.append("Content-Type: ").append(fileInfo.getContentType()).append("\r\n\r\n");
-            
-            // 读取文件内容
-            byte[] fileBytes = inputStream.readAllBytes();
-            byte[] headerBytes = requestBody.toString().getBytes(StandardCharsets.UTF_8);
-            byte[] footerBytes = ("\r\n--" + boundary + "--\r\n").getBytes(StandardCharsets.UTF_8);
-            
-            // 合并所有字节
-            byte[] fullBody = new byte[headerBytes.length + fileBytes.length + footerBytes.length];
-            System.arraycopy(headerBytes, 0, fullBody, 0, headerBytes.length);
-            System.arraycopy(fileBytes, 0, fullBody, headerBytes.length, fileBytes.length);
-            System.arraycopy(footerBytes, 0, fullBody, headerBytes.length + fileBytes.length, footerBytes.length);
-            
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://www.imgtp.com/api/upload"))
-                    .header("Content-Type", "multipart/form-data; boundary=" + boundary)
-                    .header("User-Agent", "ThriveX-Blog/1.0")
-                    .POST(HttpRequest.BodyPublishers.ofByteArray(fullBody))
+            // 发送请求
+            String responseBody = webClient.post()
+                    .uri("https://www.imgtp.com/api/upload")
+                    .header(HttpHeaders.USER_AGENT, "ThriveX-Blog/1.0")
+                    .contentType(MediaType.MULTIPART_FORM_DATA)
+                    .body(BodyInserters.fromMultipartData(builder.build()))
+                    .retrieve()
+                    .bodyToMono(String.class)
                     .timeout(Duration.ofSeconds(60))
-                    .build();
+                    .block();
             
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            
-            if (response.statusCode() == 200) {
-                JsonNode jsonResponse = objectMapper.readTree(response.body());
+            if (responseBody != null) {
+                JsonNode jsonResponse = objectMapper.readTree(responseBody);
                 
                 if (jsonResponse.has("code") && jsonResponse.get("code").asInt() == 200) {
                     JsonNode data = jsonResponse.get("data");
@@ -104,7 +89,7 @@ public class ImgtpFileStorage implements FileStorage {
                     throw new FileStorageRuntimeException("路过图床上传失败: " + message);
                 }
             } else {
-                throw new FileStorageRuntimeException("路过图床上传失败，HTTP状态码: " + response.statusCode());
+                throw new FileStorageRuntimeException("路过图床上传失败：响应为空");
             }
             
         } catch (IOException | InterruptedException e) {
@@ -117,8 +102,7 @@ public class ImgtpFileStorage implements FileStorage {
         try {
             String deleteHash = (String) fileInfo.getAttr().get("deleteHash");
             if (deleteHash == null || deleteHash.isEmpty()) {
-                // 如果没有删除hash，无法删除
-                return false;
+                // 如果没有删除hash，无法删�?                return false;
             }
             
             HttpRequest request = HttpRequest.newBuilder()
@@ -151,7 +135,7 @@ public class ImgtpFileStorage implements FileStorage {
     
     @Override
     public void download(FileInfo fileInfo, InputStream inputStream) {
-        throw new FileStorageRuntimeException("路过图床不支持下载功能");
+        throw new FileStorageRuntimeException("路过图床不支持下载功�?);
     }
     
     @Override

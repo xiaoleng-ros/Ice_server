@@ -14,7 +14,6 @@ import org.dromara.x.file.storage.core.UploadPretreatment;
 import org.dromara.x.file.storage.core.exception.FileStorageRuntimeException;
 import org.dromara.x.file.storage.core.platform.FileStorage;
 import org.dromara.x.file.storage.core.upload.FilePartInfo;
-import org.dromara.x.file.storage.core.upload.UploadPartInfo;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

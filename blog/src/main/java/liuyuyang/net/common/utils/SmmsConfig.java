@@ -3,8 +3,7 @@ package liuyuyang.net.common.utils;
 import lombok.Data;
 
 /**
- * SM.MS 配置类
- * 
+ * SM.MS 配置�? * 
  * @author laifeng
  * @date 2024/12/14
  */
