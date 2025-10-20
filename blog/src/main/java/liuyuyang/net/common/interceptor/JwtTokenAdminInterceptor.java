@@ -31,11 +31,15 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
     @Resource
     private UserTokenMapper userTokenMapper;
 
+    @Override
     public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
-        // 从请求头中获取令牌
-        String token = request.getHeader(jwtProperties.getTokenName());
+        // 非控制器方法，直接放行
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
 
-        // 如果是预检请求，直接放行        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+        // 预检请求直接放行
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
@@ -43,30 +47,37 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
 
-        // 检查方法上是否有@NoTokenRequired注解，如果有就直接放行        if (method.isAnnotationPresent(NoTokenRequired.class)) {
+        // 方法上标注了@NoTokenRequired，直接放行
+        if (method.isAnnotationPresent(NoTokenRequired.class)) {
             return true;
         }
 
-        // 校验令牌
-        try {
-            log.info("jwt校验:{}", token);
+        // 从请求头中获取令牌
+        String token = request.getHeader(jwtProperties.getTokenName());
 
-            // 如果是GET请求没有传token就直接放行，传了token就必须经过校验            if ("GET".equalsIgnoreCase(request.getMethod())) {
-                if (token != null) {
+        try {
+            log.info("jwt校验: {}", token);
+
+            // GET 请求：未传 token 放行；传了必须校验
+            if ("GET".equalsIgnoreCase(request.getMethod())) {
+                if (token != null && !token.isEmpty()) {
                     if (token.startsWith("Bearer ")) token = token.substring(7);
                     JwtUtils.parseJWT(token);
                 }
                 return true;
             }
 
-            // 处理Authorization的Bearer
+            // 非 GET 请求：必须携带并校验 token
+            if (token == null || token.isEmpty()) {
+                throw new CustomException(401, "缺少认证令牌");
+            }
             if (token.startsWith("Bearer ")) token = token.substring(7);
 
             LambdaQueryWrapper<UserToken> userTokenLambdaQueryWrapper = new LambdaQueryWrapper<>();
             userTokenLambdaQueryWrapper.eq(UserToken::getToken, token);
             List<UserToken> userTokens = userTokenMapper.selectList(userTokenLambdaQueryWrapper);
 
-            // 如果跟之前的token相匹配则进一步判断token是否有效
+            // 如果跟之前的 token 相匹配则进一步判断 token 是否有效
             if (userTokens != null && !userTokens.isEmpty()) {
                 Claims claims = JwtUtils.parseJWT(token);
                 return true;
@@ -74,7 +85,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
                 throw new CustomException(401, "该账号已在另一台设备登录");
             }
         } catch (Exception ex) {
-            System.out.println("校验失败：" + ex);
+            log.warn("JWT校验失败: {}", ex.getMessage(), ex);
             // 校验失败，响应 401 状态码
             response.setStatus(401);
             String message = ex.getMessage() != null ? ex.getMessage() : "无效或过期的token";
@@ -82,3 +93,4 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         }
     }
 }
+

@@ -67,4 +67,4 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             rolePermissionMapper.insert(rolePermission);
         }
     }
-}
+
