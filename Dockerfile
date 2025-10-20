@@ -53,6 +53,9 @@ RUN chown -R thrivex:thrivex /app
 USER thrivex
 
 # 环境变量配置（默认值，可被 Render 环境变量覆盖）
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+ENV JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8"
 ENV JAVA_OPTS="-Xms256m -Xmx512m -Djava.security.egd=file:/dev/./urandom" \
     SPRING_PROFILES_ACTIVE=pro \
     SERVER_PORT=9003 \
@@ -79,18 +82,18 @@ else \
     echo '数据库连接测试失败'; \
 fi && \
 echo '启动 Java 应用...' && \
-exec java $JAVA_OPTS -jar ./app.jar \
-    -Dserver.port=$SERVER_PORT \
-    -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE \
-    -Dspring.datasource.url=\"jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?sslmode=REQUIRED&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8\" \
-    -Dspring.datasource.username=\"$DB_USERNAME\" \
-    -Dspring.datasource.password=\"$DB_PASSWORD\" \
-    -Dspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
-    -Dspring.mail.host=\"$EMAIL_HOST\" \
-    -Dspring.mail.port=\"$EMAIL_PORT\" \
-    -Dspring.mail.username=\"$EMAIL_USERNAME\" \
-    -Dspring.mail.password=\"$EMAIL_PASSWORD\" \
-    -Dspring.mail.protocol=\"$EMAIL_PROTOCOL\" \
-    -Dspring.mail.default-encoding=\"$EMAIL_DEFAULT_ENCODING\" \
-    -Dspring.mail.properties.mail.smtp.auth=true \
-    -Dspring.mail.properties.mail.smtp.starttls.enable=true"]
+exec java -Dfile.encoding=UTF-8 $JAVA_OPTS -jar ./app.jar \
+    --server.port=$SERVER_PORT \
+    --spring.profiles.active=$SPRING_PROFILES_ACTIVE \
+    --spring.datasource.url=\"jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?sslmode=REQUIRED&useSSL=true&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8\" \
+    --spring.datasource.username=\"$DB_USERNAME\" \
+    --spring.datasource.password=\"$DB_PASSWORD\" \
+    --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
+    --spring.mail.host=\"$EMAIL_HOST\" \
+    --spring.mail.port=\"$EMAIL_PORT\" \
+    --spring.mail.username=\"$EMAIL_USERNAME\" \
+    --spring.mail.password=\"$EMAIL_PASSWORD\" \
+    --spring.mail.protocol=\"$EMAIL_PROTOCOL\" \
+    --spring.mail.default-encoding=\"${EMAIL_DEFAULT_ENCODING:-UTF-8}\" \
+    --spring.mail.properties.mail.smtp.auth=true \
+    --spring.mail.properties.mail.smtp.starttls.enable=true"]

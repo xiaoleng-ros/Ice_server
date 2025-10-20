@@ -60,3 +60,16 @@ dromara:
 file:
   dir: ./upload/
 
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  messages:
+    encoding: UTF-8
+
