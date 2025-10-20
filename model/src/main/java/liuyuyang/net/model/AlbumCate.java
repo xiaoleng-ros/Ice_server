@@ -21,6 +21,6 @@ public class AlbumCate {
     private String cover;
 
     @TableField(exist = false)
-    @ApiModelProperty(value = "相册的照片数量, example = "10")
+    @ApiModelProperty(value = "相册的照片数量", example = "10")
     private Integer count;
 }
