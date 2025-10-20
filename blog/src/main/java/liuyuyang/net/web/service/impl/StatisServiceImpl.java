@@ -98,7 +98,8 @@ public class StatisServiceImpl implements StatisService {
     /**
      * 处理日期参数
      *
-     * @param startDate 开始日�?     * @param endDate   结束日期
+     * @param startDate 开始日期
+     * @param endDate   结束日期
      * @return 处理后的日期数组 [startDate, endDate]
      */
     private String[] processDateParams(String startDate, String endDate) {

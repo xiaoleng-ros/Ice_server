@@ -22,7 +22,7 @@ public class PageConfigController {
     private PageConfigService pageConfigService;
 
     @ApiOperation("获取页面配置列表")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     @GetMapping("/list")
     public Result<List<PageConfig>> list() {
         List<PageConfig> data = pageConfigService.list();
@@ -30,7 +30,7 @@ public class PageConfigController {
     }
 
     @ApiOperation("根据名称获取页面配置")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     @GetMapping("/name/{name}")
     public Result<PageConfig> getByName(@ApiParam(value = "配置名称", required = true, example = "home_page") @PathVariable String name) {
         PageConfig pageConfig = pageConfigService.getByName(name);
@@ -38,7 +38,7 @@ public class PageConfigController {
     }
 
     @ApiOperation("根据ID获取页面配置")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 3)
     @GetMapping("/{id}")
     public Result<PageConfig> getById(@ApiParam(value = "页面配置ID", required = true, example = "1") @PathVariable Integer id) {
         PageConfig pageConfig = pageConfigService.getById(id);
@@ -46,11 +46,11 @@ public class PageConfigController {
     }
 
     @ApiOperation("根据ID更新页面配置")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     @PatchMapping("/json/{id}")
     public Result<String> updateJsonValue(
             @ApiParam(value = "页面配置ID", required = true, example = "1") @PathVariable Integer id,
-            @ApiParam(value = "JSON配置�?, required = true) @RequestBody Map<String, Object> jsonValue) {
+            @ApiParam(value = "JSON配置", required = true) @RequestBody Map<String, Object> jsonValue) {
         boolean success = pageConfigService.updateJsonValue(id, jsonValue);
         return success ? Result.success() : Result.error();
     }

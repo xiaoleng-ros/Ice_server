@@ -66,7 +66,7 @@ public class EmailUtils {
                 if (e.getMessage().contains("Authentication failed")) {
                     System.err.println("建议: 检查邮箱用户名和密码是否正确，或者是否需要使用授权码");
                 } else if (e.getMessage().contains("Connection refused") || e.getMessage().contains("timeout")) {
-                    System.err.println("建议: 检查SMTP服务器地址和端口是否正确，网络是否畅通");
+                    System.err.println("建议: 检查SMTP服务器地址和端口是否正确,网络是否畅通");
                 } else if (e.getMessage().contains("SSL") || e.getMessage().contains("TLS")) {
                     System.err.println("建议: 检查SSL/TLS配置是否正确");
                 }

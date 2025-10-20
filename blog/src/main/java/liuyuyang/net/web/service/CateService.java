@@ -11,7 +11,8 @@ public interface CateService extends IService<Cate> {
     // 判断是否存在二级分类
     Boolean isExistTwoCate(Integer cid);
 
-    // 判断该分类中是否有文�?    Boolean isCateArticleCount(Integer cid);
+    // 判断该分类中是否有文章
+    // Boolean isCateArticleCount(Integer cid);
 
     void del(Integer cid);
 

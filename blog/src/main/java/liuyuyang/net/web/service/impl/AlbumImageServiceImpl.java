@@ -74,7 +74,7 @@ public class AlbumImageServiceImpl extends ServiceImpl<AlbumImageMapper, AlbumIm
     public void isExist(List<Integer> ids) {
         for (Integer id : ids) {
             AlbumImage albumImage = this.get(id);
-            if (albumImage == null) throw new CustomException(400, "ID�? + id + "的照片不存在");
+            if (albumImage == null) throw new CustomException(400, "ID为" + id + "的照片不存在");
         }
     }
 }

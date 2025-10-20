@@ -35,8 +35,9 @@ public class YuYangUtils {
     }
 
     /**
-     * 获取Header的�?     *
-     * @param name 请求头名�?     * @return 请求�?     */
+     * 获取Header的请求头值
+     *
+     * @param name 请求头名     * @return 请求头值     */
     public static String getHeader(String name) {
         HttpServletRequest request = getRequest();
         return Objects.requireNonNull(request).getHeader(name);

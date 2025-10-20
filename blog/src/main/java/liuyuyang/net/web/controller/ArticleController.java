@@ -98,7 +98,7 @@ public class ArticleController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询文章列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 8)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 8)
     public Result paging(@RequestBody ArticleFillterVo filterVo, PageVo pageVo, @RequestHeader(value = "Authorization", required = false) String token) {
         Page<Article> list = articleService.paging(filterVo, pageVo, token);
         Map<String, Object> result = Paging.filter(list);
@@ -107,7 +107,7 @@ public class ArticleController {
 
     @GetMapping("/cate/{cate_id}")
     @ApiOperation("获取指定分类的文章")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 9)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 9)
     public Result getCateArticleList(@PathVariable Integer cate_id, PageVo pageVo) {
         Page<Article> list = articleService.getCateArticleList(cate_id, pageVo);
         Map<String, Object> result = Paging.filter(list);
@@ -116,7 +116,7 @@ public class ArticleController {
 
     @GetMapping("/tag/{tag_id}")
     @ApiOperation("获取指定标签的文章")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 10)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 10)
     public Result getTagArticleList(@PathVariable Integer tag_id, PageVo pageVo) {
         Page<Article> list = articleService.getTagArticleList(tag_id, pageVo);
         Map<String, Object> result = Paging.filter(list);
@@ -126,7 +126,7 @@ public class ArticleController {
     @GetMapping("/random")
     @ApiOperation("随机获取文章数据")
     @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 11)
-    public Result<List<Article>> getRandomArticles(@ApiParam(value = "默认随机获取5篇文章，可以通过count指定数量") @RequestParam(defaultValue = "5") Integer count) {
+    public Result<List<Article>> getRandomArticles(@ApiParam(value = "默认随机获取5篇文章,可以通过count指定数量") @RequestParam(defaultValue = "5") Integer count) {
         List<Article> data = articleService.getRandomArticles(count);
         return Result.success(data);
     }
@@ -134,14 +134,14 @@ public class ArticleController {
     @GetMapping("/hot")
     @ApiOperation("获取热门文章数据")
     @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 12)
-    public Result<List<Article>> getRecommendedArticles(@ApiParam(value = "默认浏览量最高的5篇文章，可以通过count指定数量") @RequestParam(defaultValue = "5") Integer count) {
+    public Result<List<Article>> getRecommendedArticles(@ApiParam(value = "默认浏览量最高的5篇文章,可以通过count指定数量") @RequestParam(defaultValue = "5") Integer count) {
         List<Article> data = articleService.getRecommendedArticles(count);
         return Result.success(data);
     }
 
     @GetMapping("/view/{article_id}")
     @ApiOperation("递增文章浏览量")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 13)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 13)
     public Result<String> recordView(@PathVariable Integer article_id) {
         articleService.recordView(article_id);
         return Result.success();

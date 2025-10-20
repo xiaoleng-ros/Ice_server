@@ -30,7 +30,7 @@ public class RecordController {
     @PremName("record:add")
     @PostMapping
     @ApiOperation("新增说说")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     public Result<String> add(@RequestBody Record record) {
         recordService.save(record);
         return Result.success();
@@ -39,7 +39,7 @@ public class RecordController {
     @PremName("record:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除说说")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         recordService.removeById(id);
         return Result.success();
@@ -48,7 +48,7 @@ public class RecordController {
     @PremName("record:edit")
     @PatchMapping
     @ApiOperation("编辑说说")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     public Result<String> edit(@RequestBody Record record) {
         recordService.updateById(record);
         return Result.success();
@@ -56,7 +56,7 @@ public class RecordController {
 
     @GetMapping("/{id}")
     @ApiOperation("获取说说")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 5)
     public Result<Record> get(@PathVariable Integer id) {
         Record data = recordService.getById(id);
         return Result.success(data);
@@ -65,7 +65,7 @@ public class RecordController {
     @NoTokenRequired
     @PostMapping("/list")
     @ApiOperation("获取说说列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 6)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 6)
     public Result<List<Record>> list(@RequestBody FilterVo filterVo) {
         List<Record> data = recordService.list(filterVo);
         return Result.success(data);
@@ -74,7 +74,7 @@ public class RecordController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询说说列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 7)
     public Result paging(@RequestBody FilterVo filterVo, PageVo pageVo) {
         Page<Record> data = recordService.paging(filterVo, pageVo);
         Map<String, Object> result = Paging.filter(data);

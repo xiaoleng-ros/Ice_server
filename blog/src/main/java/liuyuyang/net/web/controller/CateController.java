@@ -32,7 +32,7 @@ public class CateController {
     @PremName("cate:add")
     @PostMapping
     @ApiOperation("新增分类")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     public Result<String> add(@RequestBody CateFormDTO cateFormDTO) {
         Cate cate = BeanUtil.copyProperties(cateFormDTO, Cate.class);
         cateService.save(cate);
@@ -42,7 +42,7 @@ public class CateController {
     @PremName("cate:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除分类")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         cateService.del(id);
         return Result.success();
@@ -51,7 +51,7 @@ public class CateController {
     @PremName("cate:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除分类")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 3)
     public Result batchDel(@RequestBody List<Integer> ids) {
         for (Integer id : ids) {
             boolean e = cateService.isExistTwoCate(id);
@@ -65,7 +65,7 @@ public class CateController {
     @PremName("cate:edit")
     @PatchMapping
     @ApiOperation("编辑分类")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     public Result<String> edit(@RequestBody CateFormDTO cateFormDTO) {
         Cate cate = BeanUtil.copyProperties(cateFormDTO, Cate.class);
         cateService.updateById(cate);
@@ -74,7 +74,7 @@ public class CateController {
 
     @GetMapping("/{id}")
     @ApiOperation("获取分类")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 5)
     public Result<Cate> get(@PathVariable Integer id) {
         Cate data = cateService.get(id);
         return Result.success(data);
@@ -83,8 +83,8 @@ public class CateController {
     @NoTokenRequired
     @PostMapping("/list")
     @ApiOperation("获取分类列表")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 6)
-    public Result<List<Cate>> list(@ApiParam(value = "默认为tree树性结构，设置为list表示列表结构") @RequestParam(defaultValue = "recursion") String pattern) {
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 6)
+    public Result<List<Cate>> list(@ApiParam(value = "默认为tree树性结构,设置为list表示列表结构") @RequestParam(defaultValue = "recursion") String pattern) {
         List<Cate> data = cateService.list(pattern);
         return Result.success(data);
     }
@@ -92,7 +92,7 @@ public class CateController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询分类列表")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 7)
     public Result paging(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size) {
         Page<Cate> data = cateService.paging(page, size);
         Map<String, Object> result = Paging.filter(data);
@@ -101,7 +101,7 @@ public class CateController {
 
     @GetMapping("/article/count")
     @ApiOperation("获取每个分类中的文章数量")
-    @ApiOperationSupport(author = "刘宇�?| liuyuyang1024@yeah.net", order = 8)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 8)
     public Result<List<CateArticleCount>> cateArticleCount() {
         List<CateArticleCount> list = cateService.cateArticleCount();
         return Result.success(list);

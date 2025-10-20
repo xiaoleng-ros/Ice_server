@@ -33,7 +33,7 @@ public class CommentController {
     @NoTokenRequired
     @PostMapping
     @ApiOperation("新增评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     public Result<String> add(@RequestBody CommentFormDTO commentFormDTO) throws Exception {
         Comment comment =  BeanUtil.copyProperties(commentFormDTO, Comment.class);
         commentService.add(comment);
@@ -43,7 +43,7 @@ public class CommentController {
     @PremName("comment:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         Comment data = commentService.getById(id);
         if (data == null) return Result.error("删除评论失败：该评论不存在");
@@ -54,7 +54,7 @@ public class CommentController {
     @PremName("comment:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 3)
     public Result batchDel(@RequestBody List<Integer> ids) {
         commentService.removeByIds(ids);
         return Result.success();
@@ -63,7 +63,7 @@ public class CommentController {
     @PremName("comment:edit")
     @PatchMapping
     @ApiOperation("编辑评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     public Result<String> edit(@RequestBody CommentFormDTO commentFormDTO) {
         Comment comment =  BeanUtil.copyProperties(commentFormDTO, Comment.class);
         commentService.updateById(comment);
@@ -72,7 +72,7 @@ public class CommentController {
 
     @GetMapping("/{id}")
     @ApiOperation("获取评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 5)
     public Result<Comment> get(@PathVariable Integer id) {
         Comment data = commentService.get(id);
         return Result.success(data);
@@ -81,7 +81,7 @@ public class CommentController {
     @NoTokenRequired
     @PostMapping("/list")
     @ApiOperation("获取评论列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 6)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 6)
     public Result<List<Comment>> list(@RequestBody CommentFilterVo filterVo) {
         List<Comment> list = commentService.list(filterVo);
         return Result.success(list);
@@ -90,7 +90,7 @@ public class CommentController {
     @NoTokenRequired
     @PostMapping("/paging")
     @ApiOperation("分页查询评论列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 7)
     public Result paging(@RequestBody CommentFilterVo filterVo, PageVo pageVo) {
         Page<Comment> list = commentService.paging(filterVo, pageVo);
         Map<String, Object> result = Paging.filter(list);
@@ -100,7 +100,7 @@ public class CommentController {
     @NoTokenRequired
     @PostMapping("/article/{articleId}")
     @ApiOperation("获取指定文章中所有评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 8)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 8)
     public Result getArticleCommentList(@PathVariable Integer articleId, PageVo pageVo) {
         Page<Comment> list = commentService.getArticleCommentList(articleId, pageVo);
         Map<String, Object> result = Paging.filter(list);
@@ -110,7 +110,7 @@ public class CommentController {
     @PremName("comment:audit")
     @PatchMapping("/audit/{id}")
     @ApiOperation("审核指定评论")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 9)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 9)
     public Result auditComment(@PathVariable Integer id) {
         Comment data = commentService.getById(id);
 

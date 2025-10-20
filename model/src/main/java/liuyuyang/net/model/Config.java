@@ -20,7 +20,7 @@ public class Config {
     private String name;
 
     @TableField(typeHandler = JacksonTypeHandler.class)
-    @ApiModelProperty(value = "配置�?JSON格式)", example = "{\"name\":\"宇阳\"}", required = true)
+    @ApiModelProperty(value = "配置JSON格式", example = "{\"name\":\"宇阳\"}", required = true)
     private Map<String, Object> value;
 
     @ApiModelProperty(value = "配置备注")

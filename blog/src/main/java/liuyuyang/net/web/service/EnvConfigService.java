@@ -21,14 +21,14 @@ public interface EnvConfigService {
     List<EnvConfig> list();
     
     /**
-     * 更新 JSON 配置�?     */
+     * 更新 JSON 配置     */
     boolean updateJsonValue(Integer id, Map<String, Object> jsonValue);
     
     /**
-     * 获取 JSON 配置中的特定字段�?     */
+     * 获取 JSON 配置中的特定字段值     */
     Object getJsonFieldValue(Integer id, String fieldName);
     
     /**
-     * 更新 JSON 配置中的特定字段�?     */
+     * 更新 JSON 配置中的特定字段值     */
     boolean updateJsonFieldValue(Integer id, String fieldName, Object value);
 } 

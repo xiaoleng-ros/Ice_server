@@ -35,12 +35,13 @@ public class CateServiceImpl extends ServiceImpl<CateMapper, Cate> implements Ca
         List<Cate> data = cateMapper.selectList(lambdaQueryWrapper);
 
         if (!data.isEmpty())
-            throw new CustomException(400, "ID为：" + id + "的分类中�?" + data.size() + " 个二级分类，请解绑后重试");
+            throw new CustomException(400, "ID为:" + id + "的分类中包含" + data.size() + " 个二级分类，请解绑后重试");
 
         return true;
     }
 
-    // 判断该分类中是否有文�?    @Override
+    // 判断该分类中是否有文章
+    @Override
     public Boolean isCateArticleCount(Integer id) {
         LambdaQueryWrapper<ArticleCate> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(ArticleCate::getCateId, id);
@@ -48,7 +49,7 @@ public class CateServiceImpl extends ServiceImpl<CateMapper, Cate> implements Ca
         List<ArticleCate> data = articleCateMapper.selectList(lambdaQueryWrapper);
 
         if (!data.isEmpty())
-            throw new CustomException(400, "ID为：" + id + "的分类中�?" + data.size() + " 篇文章，请删除后重试");
+            throw new CustomException(400, "ID为:" + id + "的分类中包含" + data.size() + " 篇文章，请删除后重试");
 
         return true;
     }
@@ -88,14 +89,14 @@ public class CateServiceImpl extends ServiceImpl<CateMapper, Cate> implements Ca
         LambdaQueryWrapper<Cate> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.orderByAsc(Cate::getOrder);
 
-        // 查询所有分�?        List<Cate> list = cateMapper.selectList(lambdaQueryWrapper);
+        // 查询所有分类        List<Cate> list = cateMapper.selectList(lambdaQueryWrapper);
 
         // 分类排序
         // list.sort(Comparator.comparingInt(Cate::getOrder));
 
-        // 如果参数是list则返回列表，否则处理成树形结�?        if (Objects.equals(pattern, "list")) return list;
+        // 如果参数是list则返回列表，否则处理成树形结构        if (Objects.equals(pattern, "list")) return list;
 
-        // 构建分类�?        List<Cate> result = buildCateTree(list, 0);
+        // 构建分类树形结构        List<Cate> result = buildCateTree(list, 0);
         return result;
     }
 
@@ -105,9 +106,9 @@ public class CateServiceImpl extends ServiceImpl<CateMapper, Cate> implements Ca
         LambdaQueryWrapper<Cate> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.orderByAsc(Cate::getOrder);
 
-        // 查询所有分�?        List<Cate> list = cateMapper.selectList(lambdaQueryWrapper);
+        // 查询所有分类        List<Cate> list = cateMapper.selectList(lambdaQueryWrapper);
 
-        // 构建分类�?        List<Cate> cates = buildCateTree(list, 0);
+        // 构建分类树形结构        List<Cate> cates = buildCateTree(list, 0);
 
         // 分页处理
         int start = (page - 1) * size;

@@ -39,7 +39,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
     public void delOss(Integer id) {
         Oss oss = this.getById(id);
         if (oss == null) throw new CustomException("删除失败");
-        // 如果是默认的平台，提示不可删�?        if (oss.getPlatform().equals("local")) throw new CustomException("默认平台不可删除");
+        // 如果是默认的平台，提示不可删除        if (oss.getPlatform().equals("local")) throw new CustomException("默认平台不可删除");
         boolean result = this.removeById(id);
         if (result) OssUtils.removeStorage(OssUtils.getStorageList(), oss.getPlatform());
     }
@@ -109,7 +109,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
             }
         }
 
-        // 不允许更改平�?        oss.setPlatform(null);
+        // 不允许更改平台        oss.setPlatform(null);
         boolean result = this.updateById(oss);
         if (result) {
             oss.setPlatform(platform);
@@ -117,7 +117,7 @@ public class OssServiceImpl extends ServiceImpl<OssMapper, Oss> implements OssSe
         }
     }
 
-    // 对数据中�?0位数进行脱敏
+    // 对数据中最中间的 10 位数进行脱敏
     public String maskMiddleTen(String input) {
         if (input == null || input.length() <= 10) return input;
 

@@ -16,7 +16,7 @@ public interface PageConfigService {
     List<PageConfig> list();
 
     /**
-     * 更新 JSON 配置�?     */
+     * 更新 JSON 配置     */
     boolean updateJsonValue(Integer id, Map<String, Object> jsonValue);
 
     /**

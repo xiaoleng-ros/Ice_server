@@ -23,7 +23,7 @@ public class WebConfigController {
     private WebConfigService webConfigService;
 
     @ApiOperation("获取网站配置列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     @GetMapping("/list")
     public Result<List<WebConfig>> list() {
         List<WebConfig> data = webConfigService.list();
@@ -31,7 +31,7 @@ public class WebConfigController {
     }
 
     @ApiOperation("根据名称获取网站配置")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     @GetMapping("/name/{name}")
     public Result<WebConfig> getByName(@PathVariable String name) {
         WebConfig webConfig = webConfigService.getByName(name);
@@ -39,7 +39,7 @@ public class WebConfigController {
     }
 
     @ApiOperation("根据ID获取网站配置")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 3)
     @GetMapping("/{id}")
     public Result<WebConfig> getById(@PathVariable Integer id) {
         WebConfig webConfig = webConfigService.getById(id);
@@ -47,7 +47,7 @@ public class WebConfigController {
     }
 
     @ApiOperation("根据ID更新网站配置")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     @PatchMapping("/json/{id}")
     public Result<String> updateJsonValue(@PathVariable Integer id, @RequestBody Map<String, Object> jsonValue) {
         boolean success = webConfigService.updateJsonValue(id, jsonValue);
@@ -55,7 +55,7 @@ public class WebConfigController {
     }
 
     @ApiOperation("根据名称更新网站配置")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 5)
     @PatchMapping("/json/name/{name}")
     public Result<String> updateJsonValueByName(@PathVariable String name, @RequestBody Map<String, Object> jsonValue) {
         WebConfig webConfig = webConfigService.getByName(name);

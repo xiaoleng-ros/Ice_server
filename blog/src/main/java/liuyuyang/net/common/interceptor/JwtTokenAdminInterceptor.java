@@ -32,9 +32,10 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
     private UserTokenMapper userTokenMapper;
 
     public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
-        // 从请求头中获取令�?        String token = request.getHeader(jwtProperties.getTokenName());
+        // 从请求头中获取令牌
+        String token = request.getHeader(jwtProperties.getTokenName());
 
-        // 如果是预检请求，直接放�?        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+        // 如果是预检请求，直接放行        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
@@ -42,15 +43,15 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
 
-        // 检查方法上是否有@NoTokenRequired注解，如果有就直接放�?        if (method.isAnnotationPresent(NoTokenRequired.class)) {
+        // 检查方法上是否有@NoTokenRequired注解，如果有就直接放行        if (method.isAnnotationPresent(NoTokenRequired.class)) {
             return true;
         }
 
         // 校验令牌
         try {
-            log.info("jwt校验：{}", token);
+            log.info("jwt校验:{}", token);
 
-            // 如果是GET请求没有传token就直接放行，传了token就必须经过验�?            if ("GET".equalsIgnoreCase(request.getMethod())) {
+            // 如果是GET请求没有传token就直接放行，传了token就必须经过校验            if ("GET".equalsIgnoreCase(request.getMethod())) {
                 if (token != null) {
                     if (token.startsWith("Bearer ")) token = token.substring(7);
                     JwtUtils.parseJWT(token);

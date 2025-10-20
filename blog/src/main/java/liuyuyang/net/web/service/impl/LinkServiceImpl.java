@@ -47,7 +47,7 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements Li
             return;
         }
 
-        // 如果没有设置 order 则放在最�?        if (link.getOrder() == null) {
+        // 如果没有设置 order 则放在最后面        if (link.getOrder() == null) {
             // 查询当前类型下的网站数量
             LambdaQueryWrapper<Link> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(Link::getTypeId, link.getTypeId());

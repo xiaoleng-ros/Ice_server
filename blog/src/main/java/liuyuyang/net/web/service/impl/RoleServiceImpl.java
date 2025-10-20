@@ -52,7 +52,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         permissionQueryWrapper.eq("role_id", roleId);
         rolePermissionMapper.delete(permissionQueryWrapper);
 
-        // 然后再重新给角色绑定路由和权�?        for (Integer routeId : data.getRoute_ids()) {
+        // 然后再重新给角色绑定路由和权限
+        // for (Integer routeId : data.getRoute_ids()) {
             RouteRole routeRole = new RouteRole();
             routeRole.setRoleId(roleId);
             routeRole.setRouteId(routeId);

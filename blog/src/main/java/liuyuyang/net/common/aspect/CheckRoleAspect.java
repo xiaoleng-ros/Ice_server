@@ -25,7 +25,8 @@ import java.util.Map;
 public class CheckRoleAspect {
 
 
-    // 定义切点，支持类和方法上的注�?    @Pointcut("@within(liuyuyang.net.common.annotation.CheckRole) || @annotation(liuyuyang.net.common.annotation.CheckRole)")
+    // 定义切点，支持类和方法上的注解
+    // @Pointcut("@within(liuyuyang.net.common.annotation.CheckRole) || @annotation(liuyuyang.net.common.annotation.CheckRole)")
     private void cut() {
     }
 
@@ -57,13 +58,13 @@ public class CheckRoleAspect {
                     role = (Map<String, Object>) claims.get("role");
                 } catch (Exception e) {
                     response.setStatus(401);
-                    throw new CustomException(401, "身份验证失败：无效或过期的token");
+                    throw new CustomException(401, "身份验证失败:无效或过期的token");
                 }
 
                 boolean isPerm = rolesList.contains(role.get("mark"));
 
                 if (!isPerm) {
-                    throw new CustomException(401, "该权限仅限于�?" + String.join(", ", rolesList) + " 角色");
+                    throw new CustomException(401, "该权限仅限于以下角色: " + String.join(", ", rolesList));
                 }
             }
         }

@@ -83,7 +83,7 @@ public class RoleController {
 
     @GetMapping("/route/{id}")
     @ApiOperation("获取指定角色的路由列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 7)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 7)
     public Result<List<Route>> getRouteList(@PathVariable Integer id) {
         List<Route> list = roleService.getRouteList(id);
         return Result.success(list);
@@ -91,7 +91,7 @@ public class RoleController {
 
     @GetMapping("/permission/{id}")
     @ApiOperation("获取指定角色的权限列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 8)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 8)
     public Result<List<Permission>>getPermissionList (@PathVariable Integer id) {
         List<Permission> list = roleService.getPermissionList(id);
         return Result.success(list);

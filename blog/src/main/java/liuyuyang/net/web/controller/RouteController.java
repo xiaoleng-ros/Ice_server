@@ -28,7 +28,7 @@ public class RouteController {
     @PremName("route:add")
     @PostMapping
     @ApiOperation("新增路由")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 1)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 1)
     public Result<String> add(@RequestBody Route route) {
         routeService.save(route);
 
@@ -45,7 +45,7 @@ public class RouteController {
     @PremName("route:del")
     @DeleteMapping("/{id}")
     @ApiOperation("删除路由")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 2)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 2)
     public Result<String> del(@PathVariable Integer id) {
         Route data = routeService.getById(id);
         if (data == null) return Result.error("该数据不存在");
@@ -56,7 +56,7 @@ public class RouteController {
     @PremName("route:del")
     @DeleteMapping("/batch")
     @ApiOperation("批量删除路由")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 3)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 3)
     public Result batchDel(@RequestBody List<Integer> ids) {
         routeService.removeByIds(ids);
         return Result.success();
@@ -65,7 +65,7 @@ public class RouteController {
     @PremName("route:edit")
     @PatchMapping
     @ApiOperation("编辑路由")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 4)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 4)
     public Result<String> edit(@RequestBody Route route) {
         routeService.updateById(route);
         return Result.success();
@@ -74,7 +74,7 @@ public class RouteController {
     @PremName("route:info")
     @GetMapping("/{id}")
     @ApiOperation("获取路由")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 5)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 5)
     public Result<Route> get(@PathVariable Integer id) {
         Route data = routeService.getById(id);
         return Result.success(data);
@@ -83,7 +83,7 @@ public class RouteController {
     @PremName("route:list")
     @GetMapping
     @ApiOperation("获取路由列表")
-    @ApiOperationSupport(author = "刘宇阳 | liuyuyang1024@yeah.net", order = 6)
+    @ApiOperationSupport(author = "小冷 | 1873048956@qq.com", order = 6)
     public Result<List<Route>> list() {
         List<Route> data = routeService.list();
         return Result.success(data);

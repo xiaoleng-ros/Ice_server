@@ -23,7 +23,7 @@ public class FootprintServiceImpl extends ServiceImpl<FootprintMapper, Footprint
         QueryWrapper<Footprint> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("create_time");
 
-        // 根据关键字通过标题过滤出对应文章数�?        if (filterVo.getKey() != null && !filterVo.getKey().isEmpty()) {
+        // 根据关键字通过标题过滤出对应文章数据        if (filterVo.getKey() != null && !filterVo.getKey().isEmpty()) {
             queryWrapper.like("address", "%" + filterVo.getKey() + "%");
         }
 

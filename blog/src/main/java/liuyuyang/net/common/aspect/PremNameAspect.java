@@ -40,7 +40,8 @@ public class PremNameAspect {
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
 
-    // 定义切点，支持类和方法上的注�?    @Pointcut("@within(liuyuyang.net.common.annotation.PremName) || @annotation(liuyuyang.net.common.annotation.PremName)")
+    // 定义切点，支持类和方法上的注解
+    // @Pointcut("@within(liuyuyang.net.common.annotation.PremName) || @annotation(liuyuyang.net.common.annotation.PremName)")
     private void cut() {
     }
 
@@ -49,9 +50,10 @@ public class PremNameAspect {
         // 获取方法上的 @PremName 注解
         Optional<PremName> nameOpt = Optional.of(getMethodAnnotation(joinPoint).get());
 
-        // 如果注解存在，进行权限验�?        nameOpt.ifPresent(name -> {
-            // 当前接口的权限名�?            String prem = name.value();
-            log.info("权限名称：{}", prem);
+        // 如果注解存在，进行权限验证        nameOpt.ifPresent(name -> {
+            // 当前接口的权限名
+            String prem = name.value();
+            log.info("权限名称:{}", prem);
 
             // 获取当前请求的上下文
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -67,7 +69,7 @@ public class PremNameAspect {
                     log.debug("Authorization Header: {}", token);
 
                     // 如果 token 为 null，跳过权限校验                    if (token == null) {
-                        log.info("Token为空，跳过权限校验");
+                        log.info("Token为空,跳过权限校验");
                         throw new CustomException("Token 不能为空");
                     }
 
@@ -96,10 +98,10 @@ public class PremNameAspect {
                         .anyMatch(permission -> permission.getName().equals(prem));
 
                 if (!hasPermission) {
-                    throw new CustomException(400, "当前角色没有权限：" + prem);
+                    throw new CustomException(400, "当前角色没有权限:" + prem);
                 }
 
-                log.info("角色ID：{}", role.get("id"));
+                log.info("角色ID:{}", role.get("id"));
             }
         });
     }
@@ -121,7 +123,7 @@ public class PremNameAspect {
                 }
             }
         } catch (Exception e) {
-            log.error("获取方法时出�?, e);
+            log.error("获取方法时出错: {}", e.getMessage(), e);
         }
         return null;
     }

@@ -3,7 +3,9 @@ package liuyuyang.net.common.utils;
 import lombok.Data;
 
 /**
- * SM.MS 配置�? * 
+ * SM.MS 配置类
+ * 用于存储和管理 SM.MS 存储平台的配置信息
+ * 
  * @author laifeng
  * @date 2024/12/14
  */

@@ -113,7 +113,7 @@ public class WallServiceImpl extends ServiceImpl<WallMapper, Wall> implements Wa
         Wall wall = wallMapper.selectById(id);
         if (wall == null) throw new CustomException("没有这条留言");
 
-        // 如果是精选则取消，否则设�?        if (wall.getIsChoice() == 0) {
+        // 如果是精选则取消，否则设为精选        if (wall.getIsChoice() == 0) {
             wall.setIsChoice(1);
         } else {
             wall.setIsChoice(0);

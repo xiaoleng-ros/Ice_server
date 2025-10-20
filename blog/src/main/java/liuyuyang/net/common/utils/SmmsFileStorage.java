@@ -64,7 +64,7 @@ public class SmmsFileStorage implements FileStorage {
             HttpResponse response = request.execute();
             
             if (!response.isOk()) {
-                throw new FileStorageRuntimeException("SM.MS上传失败，HTTP状态码：" + response.getStatus());
+                throw new FileStorageRuntimeException("SM.MS上传失败,HTTP状态码:" + response.getStatus());
             }
             
             // 解析响应
@@ -72,7 +72,7 @@ public class SmmsFileStorage implements FileStorage {
             
             if (!result.getBool("success", false)) {
                 String message = result.getStr("message", "未知错误");
-                throw new FileStorageRuntimeException("SM.MS上传失败：" + message);
+                throw new FileStorageRuntimeException("SM.MS上传失败:" + message);
             }
             
             JSONObject data = result.getJSONObject("data");
@@ -113,7 +113,7 @@ public class SmmsFileStorage implements FileStorage {
                 if (StrUtil.isNotBlank(hash)) {
                     deleteUrl = DELETE_URL + hash;
                 } else {
-                    throw new FileStorageRuntimeException("无法删除文件：缺少删除URL或hash");
+                    throw new FileStorageRuntimeException("无法删除文件:缺少删除URL或hash");
                 }
             }
             
@@ -123,7 +123,7 @@ public class SmmsFileStorage implements FileStorage {
             HttpResponse response = request.execute();
             
             if (!response.isOk()) {
-                throw new FileStorageRuntimeException("SM.MS删除失败，HTTP状态码：" + response.getStatus());
+                throw new FileStorageRuntimeException("SM.MS删除失败,HTTP状态码:" + response.getStatus());
             }
             
             JSONObject result = JSONUtil.parseObj(response.body());
@@ -147,7 +147,7 @@ public class SmmsFileStorage implements FileStorage {
             HttpResponse response = request.execute();
             
             if (!response.isOk()) {
-                throw new FileStorageRuntimeException("下载文件失败，HTTP状态码：" + response.getStatus());
+                throw new FileStorageRuntimeException("下载文件失败,HTTP状态码:" + response.getStatus());
             }
             
             byte[] bytes = response.bodyBytes();

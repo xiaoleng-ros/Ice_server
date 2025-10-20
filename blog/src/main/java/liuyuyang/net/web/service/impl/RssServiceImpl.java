@@ -84,14 +84,14 @@ public class RssServiceImpl implements RssService {
     }
 
     // 定时任务更新缓存
-    @Scheduled(fixedRate = 3600000) // 每小时更新一�?    @CacheEvict(value = "rssCache", key = "'allFeeds'")
+    @Scheduled(fixedRate = 3600000) // 每小时更新一次缓存    @CacheEvict(value = "rssCache", key = "'allFeeds'")
     public void evictCache() {
     }
 
     /**
      * 处理单个RSS源，带有超时控制
      *
-     * @param link    包含RSS地址的链接对�?     * @param rssList 用于收集结果的列�?     */
+     * @param link    包含RSS地址的链接对象     * @param rssList 用于收集结果的列表     */
     private void processFeedWithTimeout(Link link, List<Rss> rssList) {
         try {
             HttpURLConnection connection = (HttpURLConnection)
@@ -102,7 +102,7 @@ public class RssServiceImpl implements RssService {
             try (InputStream input = connection.getInputStream()) {
                 SyndFeed feed = new SyndFeedInput().build(new XmlReader(input));
 
-                // 使用Stream处理并限制数�?                List<Rss> limitedItems = feed.getEntries().stream()
+                // 使用Stream处理并限制数量为5条                List<Rss> limitedItems = feed.getEntries().stream()
                         .sorted(Comparator.comparing(SyndEntry::getPublishedDate).reversed())
                         .limit(5)
                         .map(data -> {

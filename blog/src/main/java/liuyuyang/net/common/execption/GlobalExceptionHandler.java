@@ -24,7 +24,8 @@ public class GlobalExceptionHandler {
         return Result.error(e.code(), e.error());
     }
 
-    // 处理所有异�?    @ResponseBody
+    // 处理所有异常
+    @ResponseBody
     @ExceptionHandler(Exception.class)
     public Result<Object> exception(Exception e) {
         e.printStackTrace();

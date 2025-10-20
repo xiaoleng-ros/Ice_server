@@ -164,7 +164,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = userMapper.selectOne(queryWrapper);
 
         if (user == null) {
-            throw new CustomException(400, "用户名或旧密码错�?);
+            throw new CustomException(400, "用户名或旧密码错误");
         }
 
         user.setUsername(data.getNewUsername());
@@ -180,7 +180,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletResponse response = attributes.getResponse();
             response.setStatus(401);
-            throw new CustomException(400, "身份验证失败：无效或过期的Token");
+            throw new CustomException(400, "身份验证失败:无效或过期的Token");
         }
     }
 }

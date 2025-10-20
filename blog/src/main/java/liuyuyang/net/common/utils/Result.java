@@ -9,7 +9,8 @@ import java.util.Map;
 @AllArgsConstructor
 public class Result<T> {
     private Integer code; // 响应码，200 代表成功; 400 代表失败
-    private String message; // 响应�?描述字符�?    private T data; // 返回的数�?
+    private String message; // 响应描述字符
+    // private T data; // 返回的数据
     public static <T> Result<T> status(boolean flag) {
         return flag ? success("操作成功") : error("操作失败");
     }

@@ -15,7 +15,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @TableName("article")
 public class Article extends ArticleFormDTO {
-    @ApiModelProperty(value = "文章浏览�?, example = "100")
+    @ApiModelProperty(value = "文章浏览量, example = "100")
     private Integer view;
 
     @ApiModelProperty(value = "文章评论数量", example = "20")

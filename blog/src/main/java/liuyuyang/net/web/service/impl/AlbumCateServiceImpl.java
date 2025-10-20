@@ -64,7 +64,8 @@ public class AlbumCateServiceImpl extends ServiceImpl<AlbumCateMapper, AlbumCate
 
         if (list.isEmpty()) return list;
 
-        // 批量查所有图�?        List<Integer> cateIds = list.stream().map(AlbumCate::getId).collect(Collectors.toList());
+        // 批量查所有图分类下的图片数量
+        // List<Integer> cateIds = list.stream().map(AlbumCate::getId).collect(Collectors.toList());
         LambdaQueryWrapper<AlbumImage> imageWrapper = new LambdaQueryWrapper<>();
         imageWrapper.in(AlbumImage::getCateId, cateIds);
         List<AlbumImage> allImages = albumImageMapper.selectList(imageWrapper);
@@ -118,7 +119,7 @@ public class AlbumCateServiceImpl extends ServiceImpl<AlbumCateMapper, AlbumCate
     public void isExist(List<Integer> ids) {
         for (Integer id : ids) {
             AlbumCate albumCate = this.get(id);
-            if (albumCate == null) throw new CustomException(400, "ID�? + id + "的相册不存在");
+            if (albumCate == null) throw new CustomException(400, "ID�? + id + "的相册不存在");
         }
     }
 }
